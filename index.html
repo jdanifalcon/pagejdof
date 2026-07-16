@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jessica Daniela Ocaña Falcón | Portafolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --bg-dark: #070709;
+      --bg-card: rgba(18, 18, 22, 0.7);
+      --primary: #e63946;
+      --primary-glow: rgba(230, 57, 70, 0.15);
+      --text-light: #f8f9fa;
+      --text-muted: #8e8e93;
+      --border: rgba(255, 255, 255, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* SECTIONS */
+    .interactive-section {
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .bg-canvas {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .section-content {
+      position: relative;
+      z-index: 10;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 80px 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.2rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .section-title h2 span { color: var(--primary); }
+
+    .section-title p {
+      color: var(--text-muted);
+      margin-top: 10px;
+      font-size: 0.95rem;
+    }
+
+    /* HERO */
+    .hero-header {
+      padding: 100px 20px 20px;
+      text-align: center;
+    }
+
+    .hero-header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 4.2rem);
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .hero-header .subtitle {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 25px;
+    }
+
+    .hero-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .hero-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: all 0.3s;
+    }
+
+    .hero-links a:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* STICKY NAV */
+    .tabs-nav-container {
+      max-width: 900px;
+      margin: 20px auto 40px;
+      padding: 0 20px;
+      position: sticky;
+      top: 20px;
+      z-index: 999;
+    }
+
+    .tabs-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(18, 18, 20, 0.9);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 6px;
+      backdrop-filter: blur(15px);
+    }
+
+    .tab-btn {
+      flex: 1;
+      text-align: center;
+      padding: 12px 5px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      border-radius: 50px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .tab-btn.active, .tab-btn:hover {
+      background-color: #fff;
+      color: #000;
+    }
+
+    /* SOBRE MÍ */
+    #sobre-mi {
+      background: radial-gradient(circle at 50% 50%, rgba(15, 15, 25, 0.4) 0%, var(--bg-dark) 100%);
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    @media (max-width: 850px) {
+      .profile-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    .profile-text h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 25px;
+    }
+
+    .profile-text p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      line-height: 1.8;
+    }
+
+    .profile-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .profile-tag {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+    }
+
+    /* PHOTO BOX */
+    .photo-box {
+      border: 2px dashed rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      aspect-ratio: 1 / 1.1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.01);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(5px);
+    }
+
+    .photo-box img {
+      position: absolute;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      top: 0; left: 0;
+      display: none;
+    }
+
+    .photo-box .avatar-icon {
+      font-size: 3.5rem;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+
+    .photo-box h4 { font-size: 0.95rem; color: var(--text-light); margin-bottom: 8px; }
+    .photo-box p { font-size: 0.8rem; color: var(--text-muted); }
+
+    /* CARDS GRID */
+    #talleres-cursos { background: #09090b; }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+
+    .dhero-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 35px 30px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.4s ease;
+      cursor: default;
+    }
+
+    .dhero-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(800px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(255,255,255,0.06), transparent 40%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .dhero-card:hover { border-color: rgba(255,255,255,0.25); }
+
+    .card-icon {
+      width: 50px; height: 50px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 25px;
+      font-size: 1.4rem;
+      color: var(--primary);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .dhero-card h3 { font-size: 1.3rem; font-weight: 700; color: #fff; margin-bottom: 12px; position: relative; z-index: 2; }
+    .dhero-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; position: relative; z-index: 2; }
+
+    /* APLICACIONES */
+    #aplicacion-software { background-color: #050507; }
+
+    .mapas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 40px;
+    }
+
+    @media (max-width: 600px) {
+      .mapas-grid { grid-template-columns: 1fr; }
+    }
+
+    .mapa-card {
+      background: rgba(18, 18, 22, 0.8);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(10px);
+    }
+
+    .mapa-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--primary);
+    }
+
+    .mapa-preview {
+      position: relative;
+      height: 280px;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .mapa-preview iframe {
+      width: 100%; height: 100%;
+      border: none;
+      pointer-events: none;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+
+    .mapa-card:hover .mapa-preview iframe { opacity: 0.95; }
+
+    .mapa-overlay-btn {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(230, 57, 70, 0.95);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-weight: bold;
+      font-size: 0.82rem;
+      letter-spacing: 0.5px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+      transition: transform 0.3s;
+    }
+
+    .mapa-overlay-btn:hover { transform: translate(-50%, -50%) scale(1.05); }
+
+    .mapa-info {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .mapa-info h3 { font-size: 1.3rem; margin-bottom: 12px; color: #fff; }
+    .mapa-info p { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 20px; line-height: 1.6; }
+
+    .mapa-tags { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .mapa-tag {
+      background: rgba(255,255,255,0.04);
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--primary);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* FORMACIÓN ACADÉMICA */
+    #experiencia-academica { background-color: #040406; }
+
+    .edu-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .edu-card {
+      background: rgba(18, 18, 22, 0.85);
+      border: 1px solid var(--border);
+      padding: 35px;
+      border-radius: 16px;
+      position: relative;
+      transition: border-color 0.3s;
+      backdrop-filter: blur(10px);
+    }
+
+    .edu-card:hover { border-color: var(--primary); }
+
+    .edu-card h3 { font-size: 1.2rem; color: #fff; margin-bottom: 5px; }
+
+    .edu-card .institution {
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+    }
+
+    .edu-card .period {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+
+    .edu-card p { color: var(--text-muted); font-size: 0.92rem; }
+
+    .edu-badge {
+      display: inline-block;
+      background: var(--primary-glow);
+      border: 1px solid rgba(230, 57, 70, 0.3);
+      color: var(--primary);
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    /* TECH CONVEYOR */
+    .sushi-conveyor-section {
+      padding: 80px 0;
+      background: #050507;
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+    }
+
+    .sushi-conveyor-section h3 {
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.6rem;
+      text-transform: uppercase;
+      margin-bottom: 50px;
+      letter-spacing: 2px;
+    }
+
+    .sushi-conveyor-section h3 span { color: var(--primary); }
+
+    .sushi-conveyor {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      padding: 15px 0;
+    }
+
+    .sushi-conveyor::before,
+    .sushi-conveyor::after {
+      content: "";
+      height: 100%;
+      position: absolute;
+      width: 180px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .sushi-conveyor::before {
+      left: 0; top: 0;
+      background: linear-gradient(to right, #050507, transparent);
+    }
+
+    .sushi-conveyor::after {
+      right: 0; top: 0;
+      background: linear-gradient(to left, #050507, transparent);
+    }
+
+    .sushi-track {
+      display: flex;
+      gap: 30px;
+      width: calc(250px * 30);
+      animation: sushiScroll 60s linear infinite;
+    }
+
+    .sushi-plate {
+      width: 220px;
+      background: #121216;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 25px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-shrink: 0;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .sushi-plate:hover {
+      transform: translateY(-5px) scale(1.03);
+      border-color: var(--primary);
+    }
+
+    .sushi-plate i { font-size: 1.8rem; color: var(--primary); }
+    .sushi-plate span { font-weight: 700; font-size: 0.95rem; }
+
+    @keyframes sushiScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(calc(-250px * 15)); }
+    }
+
+    /* CONTACTO */
+    #contacto {
+      background: #030304;
+      padding: 100px 20px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    #contacto h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.2rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+    }
+
+    #contacto h2 span { color: var(--primary); }
+
+    #contacto .contact-subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 40px;
+    }
+
+    .contact-grid {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 28px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .contact-item:hover {
+      border-color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    .contact-item i { color: var(--primary); font-size: 1.1rem; }
+    .contact-item span { font-size: 0.88rem; font-weight: 600; color: var(--text-light); }
+
+    /* FOOTER */
+    footer {
+      background: #030304;
+      padding: 30px 20px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .hero-header { padding: 80px 15px 15px; }
+      .hero-links a { font-size: 0.72rem; padding: 8px 16px; }
+      .tab-btn { font-size: 0.65rem; letter-spacing: 1px; padding: 10px 3px; }
+      .section-content { padding: 60px 15px; }
+      .section-title h2 { font-size: 1.6rem; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .contact-grid { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero-header">
+    <h1>Jessica Ocaña Falcón</h1>
+    <p class="subtitle">Geomática · Percepción Remota · Ciencia de Datos Geoespaciales</p>
+    <div class="hero-links">
+      <a href="mailto:hifalcon@proton.me"><i class="fas fa-envelope"></i> Email</a>
+      <a href="https://jdofalcon.carrd.co" target="_blank"><i class="fas fa-globe"></i> Portafolio</a>
+      <a href="https://github.com/jdofalcon" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+      <a href="https://linkedin.com/in/jdofalcon" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+    </div>
+  </header>
+
+  <!-- NAV -->
+  <div class="tabs-nav-container">
+    <nav class="tabs-nav">
+      <a href="#sobre-mi" class="tab-btn active" data-target="sobre-mi">Sobre Mí</a>
+      <a href="#talleres-cursos" class="tab-btn" data-target="talleres-cursos">Talleres</a>
+      <a href="#aplicacion-software" class="tab-btn" data-target="aplicacion-software">Proyectos</a>
+      <a href="#experiencia-academica" class="tab-btn" data-target="experiencia-academica">Formación</a>
+      <a href="#contacto" class="tab-btn" data-target="contacto">Contacto</a>
+    </nav>
+  </div>
+
+  <!-- SOBRE MÍ -->
+  <section id="sobre-mi" class="interactive-section">
+    <canvas id="canvas-galaxia" class="bg-canvas"></canvas>
+    <div class="section-content">
+      <div class="profile-grid">
+        <div class="profile-text">
+          <h2>Sobre Mí</h2>
+          <p>
+            Gestora ambiental y especialista en geomática con maestría en Ciencias de la Información Geoespacial. Mi trabajo se centra en la aplicación de tecnologías espaciales, percepción remota y aprendizaje profundo para la conservación, restauración ecológica y monitoreo territorial.
+          </p>
+          <p>
+            A través de mis proyectos traduzco problemas espaciales complejos en mapas, modelos y sistemas interactivos que ayudan a entender la dinámica de nuestros ecosistemas y territorio.
+          </p>
+          <div class="profile-tags">
+            <span class="profile-tag">Percepción Remota</span>
+            <span class="profile-tag">Deep Learning</span>
+            <span class="profile-tag">Ecosistemas Costeros</span>
+            <span class="profile-tag">Automatización GIS</span>
+            <span class="profile-tag">Monitoreo Forestal</span>
+          </div>
+        </div>
+        <div class="photo-box">
+          <img src="tu-foto-aqui.jpg" alt="Jessica Daniela Ocaña Falcón" id="profile-img">
+          <div class="avatar-icon">
+            <i class="fas fa-satellite-dish"></i>
+          </div>
+          <h4>Tu Foto Aquí</h4>
+          <p>(Reemplaza con tu imagen)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TALLERES & CURSOS -->
+  <section id="talleres-cursos" class="interactive-section">
+    <div class="section-content">
+      <div class="section-title">
+        <h2>Talleres &amp; <span>Cursos</span></h2>
+        <p>Programas educativos que he diseñado y facilitado en ciencia de datos geoespaciales.</p>
+      </div>
+
+      <div class="cards-grid">
+        <div class="dhero-card">
+          <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+          <h3>R Básico</h3>
+          <p>Introducción al análisis de datos con R. Fundamentos de programación, manipulación de dataframes y visualización estadística aplicada a ciencias ambientales.</p>
+        </div>
+
+        <div class="dhero-card">
+          <div class="card-icon"><i class="fas fa-globe"></i></div>
+          <h3>QGIS Básico</h3>
+          <p>Sistemas de información geográfica. Creación de capas vectoriales, manipulación de rasters, georreferenciación y salida cartográfica profesional.</p>
+        </div>
+
+        <div class="dhero-card">
+          <div class="card-icon"><i class="fas fa-book-open"></i></div>
+          <h3>Atlas en QGIS</h3>
+          <p>Automatización de mapas en serie. Generación automatizada de mapas temáticos personalizados mediante la herramienta Atlas para entregas masivas.</p>
+        </div>
+
+        <div class="dhero-card">
+          <div class="card-icon"><i class="fab fa-python"></i></div>
+          <h3>PyQGIS</h3>
+          <p>Automatización avanzada con Python dentro de QGIS. Desarrollo de scripts, geoprocesamiento programado y personalización de la consola para flujos científicos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APLICACIONES / PROYECTOS -->
+  <section id="aplicacion-software" class="interactive-section">
+    <canvas id="canvas-topografia" class="bg-canvas"></canvas>
+    <div class="section-content">
+      <div class="section-title">
+        <h2>Aplicaciones &amp; <span>Proyectos</span></h2>
+        <p>Mapas interactivos y plataformas que he diseñado y publicado.</p>
+      </div>
+
+      <div class="mapas-grid">
+        <article class="mapa-card">
+          <div class="mapa-preview">
+            <iframe src="https://jdofalcon.shinyapps.io/capital-natural-sureste-mexico/" title="Capital Natural Sureste de México" loading="lazy"></iframe>
+            <a href="https://jdofalcon.shinyapps.io/capital-natural-sureste-mexico/" target="_blank" class="mapa-overlay-btn">
+              Abrir Mapa <i class="fas fa-external-link-alt"></i>
+            </a>
+          </div>
+          <div class="mapa-info">
+            <h3>Capital Natural del Sureste de México</h3>
+            <p>Plataforma interactiva en R Shiny para análisis territorial, monitoreo de ecosistemas y visualización de recursos naturales en el Sureste Mexicano.</p>
+            <div class="mapa-tags">
+              <span class="mapa-tag">R Shiny</span>
+              <span class="mapa-tag">Gestión Ambiental</span>
+              <span class="mapa-tag">Geomática</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="mapa-card">
+          <div class="mapa-preview">
+            <iframe src="https://tablero-mvilidad-uxmal-jdof.netlify.app/" title="Tablero de Movilidad Uxmal" loading="lazy"></iframe>
+            <a href="https://tablero-mvilidad-uxmal-jdof.netlify.app/" target="_blank" class="mapa-overlay-btn">
+              Abrir Tablero <i class="fas fa-external-link-alt"></i>
+            </a>
+          </div>
+          <div class="mapa-info">
+            <h3>Tablero de Movilidad Uxmal</h3>
+            <p>Dashboard analítico para el estudio y monitoreo de patrones de movilidad espacial en el sitio arqueológico de Uxmal y zonas de influencia.</p>
+            <div class="mapa-tags">
+              <span class="mapa-tag">JavaScript</span>
+              <span class="mapa-tag">Análisis Espacial</span>
+              <span class="mapa-tag">WebGIS</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMACIÓN ACADÉMICA -->
+  <section id="experiencia-academica" class="interactive-section">
+    <canvas id="canvas-ciudad" class="bg-canvas"></canvas>
+    <div class="section-content">
+      <div class="section-title">
+        <h2>Formación <span>Académica</span></h2>
+        <p>Trayectoria formativa en geociencias, gestión ambiental y geointeligencia computacional.</p>
+      </div>
+
+      <div class="edu-timeline">
+        <div class="edu-card">
+          <span class="edu-badge">En proceso de titulación</span>
+          <h3>Maestría en Ciencias de la Información Geoespacial</h3>
+          <p class="institution">Centro de Investigación en Ciencias de Información Geoespacial (CentroGeo)</p>
+          <p class="period">2023 – 2025</p>
+          <p>Especialización en Geointeligencia Computacional. Tesis: segmentación semántica con redes neuronales profundas aplicada al análisis de la línea costera de Yucatán.</p>
+        </div>
+
+        <div class="edu-card">
+          <h3>Licenciatura en Gestión Ambiental</h3>
+          <p class="institution">Universidad Juárez Autónoma de Tabasco (UJAT)</p>
+          <p class="period">2014 – 2020</p>
+          <p>Formación en manejo de ecosistemas, planeación sustentable y aplicación cartográfica ambiental.</p>
+        </div>
+
+        <div class="edu-card">
+          <h3>Diplomado en Restauración Ecológica y Servicios Ambientales</h3>
+          <p class="institution">Instituto de Ecología, A.C. (INECOL)</p>
+          <p>Modelado del paisaje, valoración y recuperación funcional de ecosistemas degradados.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECNOLOGÍAS CONVEYOR -->
+  <section class="sushi-conveyor-section">
+    <h3>Stack <span>Tecnológico</span></h3>
+    <div class="sushi-conveyor">
+      <div class="sushi-track">
+        <div class="sushi-plate"><i class="fab fa-python"></i> <span>Python</span></div>
+        <div class="sushi-plate"><i class="fas fa-chart-line"></i> <span>R</span></div>
+        <div class="sushi-plate"><i class="fab fa-html5"></i> <span>HTML 5</span></div>
+        <div class="sushi-plate"><i class="fab fa-css3-alt"></i> <span>CSS 3</span></div>
+        <div class="sushi-plate"><i class="fab fa-js"></i> <span>JavaScript</span></div>
+        <div class="sushi-plate"><i class="fas fa-rocket"></i> <span>Julia</span></div>
+        <div class="sushi-plate"><i class="fas fa-globe-americas"></i> <span>QGIS</span></div>
+        <div class="sushi-plate"><i class="fas fa-map-marked-alt"></i> <span>ArcGIS Pro</span></div>
+        <div class="sushi-plate"><i class="fas fa-satellite"></i> <span>Google Earth Engine</span></div>
+        <div class="sushi-plate"><i class="fas fa-database"></i> <span>PostgreSQL / PostGIS</span></div>
+        <div class="sushi-plate"><i class="fas fa-cube"></i> <span>Blender</span></div>
+        <div class="sushi-plate"><i class="fas fa-chart-bar"></i> <span>Power BI</span></div>
+        <div class="sushi-plate"><i class="fas fa-brain"></i> <span>PyTorch</span></div>
+        <div class="sushi-plate"><i class="fab fa-git-alt"></i> <span>Git / GitHub</span></div>
+        <div class="sushi-plate"><i class="fas fa-satellite-dish"></i> <span>SNAP / ENVI</span></div>
+        <!-- DUPLICADOS PARA LOOP -->
+        <div class="sushi-plate"><i class="fab fa-python"></i> <span>Python</span></div>
+        <div class="sushi-plate"><i class="fas fa-chart-line"></i> <span>R</span></div>
+        <div class="sushi-plate"><i class="fab fa-html5"></i> <span>HTML 5</span></div>
+        <div class="sushi-plate"><i class="fab fa-css3-alt"></i> <span>CSS 3</span></div>
+        <div class="sushi-plate"><i class="fab fa-js"></i> <span>JavaScript</span></div>
+        <div class="sushi-plate"><i class="fas fa-rocket"></i> <span>Julia</span></div>
+        <div class="sushi-plate"><i class="fas fa-globe-americas"></i> <span>QGIS</span></div>
+        <div class="sushi-plate"><i class="fas fa-map-marked-alt"></i> <span>ArcGIS Pro</span></div>
+        <div class="sushi-plate"><i class="fas fa-satellite"></i> <span>Google Earth Engine</span></div>
+        <div class="sushi-plate"><i class="fas fa-database"></i> <span>PostgreSQL / PostGIS</span></div>
+        <div class="sushi-plate"><i class="fas fa-cube"></i> <span>Blender</span></div>
+        <div class="sushi-plate"><i class="fas fa-chart-bar"></i> <span>Power BI</span></div>
+        <div class="sushi-plate"><i class="fas fa-brain"></i> <span>PyTorch</span></div>
+        <div class="sushi-plate"><i class="fab fa-git-alt"></i> <span>Git / GitHub</span></div>
+        <div class="sushi-plate"><i class="fas fa-satellite-dish"></i> <span>SNAP / ENVI</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto">
+    <h2>Hablemos &amp; <span>Colaboremos</span></h2>
+    <p class="contact-subtitle">Abierta a colaboraciones en investigación, consultoría geoespacial y capacitación.</p>
+    <div class="contact-grid">
+      <a href="mailto:hifalcon@proton.me" class="contact-item">
+        <i class="fas fa-envelope"></i>
+        <span>hifalcon@proton.me</span>
+      </a>
+      <a href="https://jdofalcon.carrd.co" target="_blank" class="contact-item">
+        <i class="fas fa-globe"></i>
+        <span>jdofalcon.carrd.co</span>
+      </a>
+      <a href="tel:+529933606659" class="contact-item">
+        <i class="fas fa-phone"></i>
+        <span>993-360-6659</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Jessica Daniela Ocaña Falcón · Geomática &amp; Ciencia de Datos Geoespaciales</p>
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    /* CARD MOUSE TRACKING */
+    document.querySelectorAll('.dhero-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+      });
+    });
+
+    /* ACTIVE TAB ON SCROLL */
+    const sections = document.querySelectorAll('.interactive-section, #contacto');
+    const navBtns = document.querySelectorAll('.tab-btn');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        if (pageYOffset >= (section.offsetTop - section.clientHeight / 3)) {
+          current = section.getAttribute('id');
+        }
+      });
+      navBtns.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-target') === current) btn.classList.add('active');
+      });
+    });
+
+    /* CANVAS 1: GALAXY */
+    const cGal = document.getElementById('canvas-galaxia');
+    const ctxG = cGal.getContext('2d');
+    let stars = [];
+
+    function resG() { cGal.width = cGal.offsetWidth; cGal.height = cGal.offsetHeight; }
+    resG();
+
+    class Star {
+      constructor() {
+        this.x = Math.random() * cGal.width;
+        this.y = Math.random() * cGal.height;
+        this.size = Math.random() * 1.5;
+        this.sx = (Math.random() - 0.5) * 0.15;
+        this.sy = (Math.random() - 0.5) * 0.15;
+        this.color = Math.random() > 0.85 ? 'rgba(230,57,70,0.5)' : `rgba(255,255,255,${0.2 + Math.random() * 0.3})`;
+      }
+      update() {
+        this.x += this.sx; this.y += this.sy;
+        if (this.x < 0 || this.x > cGal.width) this.sx *= -1;
+        if (this.y < 0 || this.y > cGal.height) this.sy *= -1;
+      }
+      draw() {
+        ctxG.fillStyle = this.color;
+        ctxG.beginPath();
+        ctxG.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctxG.fill();
+      }
+    }
+
+    for (let i = 0; i < 100; i++) stars.push(new Star());
+
+    function animG() {
+      ctxG.clearRect(0, 0, cGal.width, cGal.height);
+      stars.forEach(s => { s.update(); s.draw(); });
+      requestAnimationFrame(animG);
+    }
+    animG();
+
+    /* CANVAS 2: TOPOGRAPHY */
+    const cTopo = document.getElementById('canvas-topografia');
+    const ctxT = cTopo.getContext('2d');
+    let mouse = { x: null, y: null, r: 120 };
+
+    function resT() { cTopo.width = cTopo.offsetWidth; cTopo.height = cTopo.offsetHeight; }
+    resT();
+
+    window.addEventListener('mousemove', e => {
+      const rect = cTopo.getBoundingClientRect();
+      mouse.x = e.clientX - rect.left;
+      mouse.y = e.clientY - rect.top;
+    });
+    window.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+
+    let pt = 0;
+    function drawTopo() {
+      ctxT.clearRect(0, 0, cTopo.width, cTopo.height);
+      ctxT.lineWidth = 1.2;
+      const n = 12, step = cTopo.height / n;
+
+      for (let i = 0; i < n; i++) {
+        ctxT.beginPath();
+        let py = i * step + 40;
+        for (let px = 0; px <= cTopo.width; px += 20) {
+          let ty = py + Math.sin(px * 0.003 + i) * 35 + Math.cos(px * 0.002 - i * 0.5) * 25;
+          if (mouse.x !== null) {
+            let d = Math.sqrt((px - mouse.x) ** 2 + (ty - mouse.y) ** 2);
+            if (d < mouse.r) ty += Math.sin(d * 0.05) * 15 * ((mouse.r - d) / mouse.r);
+          }
+          px === 0 ? ctxT.moveTo(px, ty) : ctxT.lineTo(px, ty);
+        }
+        ctxT.strokeStyle = `rgba(255,255,255,${0.04 + i * 0.008})`;
+        ctxT.stroke();
+      }
+
+      pt += 0.002;
+      let dx = (Math.sin(pt) * 0.5 + 0.5) * cTopo.width;
+      let li = 4, by = li * step + 40;
+      let dy = by + Math.sin(dx * 0.003 + li) * 35 + Math.cos(dx * 0.002 - li * 0.5) * 25;
+      let hue = (pt * 150) % 360;
+
+      ctxT.fillStyle = `hsla(${hue},85%,55%,1)`;
+      ctxT.beginPath(); ctxT.arc(dx, dy, 5, 0, Math.PI * 2); ctxT.fill();
+      ctxT.strokeStyle = `hsla(${hue},85%,55%,0.25)`;
+      ctxT.beginPath(); ctxT.arc(dx, dy, 13, 0, Math.PI * 2); ctxT.stroke();
+
+      requestAnimationFrame(drawTopo);
+    }
+    drawTopo();
+
+    /* CANVAS 3: CITY BLUEPRINT */
+    const cCity = document.getElementById('canvas-ciudad');
+    const ctxC = cCity.getContext('2d');
+
+    function resC() { cCity.width = cCity.offsetWidth; cCity.height = cCity.offsetHeight; }
+    resC();
+
+    function drawCity() {
+      ctxC.clearRect(0, 0, cCity.width, cCity.height);
+      const g = 60;
+      ctxC.strokeStyle = 'rgba(59,130,246,0.04)';
+      ctxC.lineWidth = 1;
+
+      for (let x = 0; x < cCity.width; x += g) {
+        ctxC.beginPath(); ctxC.moveTo(x, 0); ctxC.lineTo(x, cCity.height); ctxC.stroke();
+      }
+      for (let y = 0; y < cCity.height; y += g) {
+        ctxC.beginPath(); ctxC.moveTo(0, y); ctxC.lineTo(cCity.width, y); ctxC.stroke();
+      }
+
+      ctxC.fillStyle = 'rgba(59,130,246,0.012)';
+      ctxC.strokeStyle = 'rgba(255,255,255,0.02)';
+
+      [{x:120,y:180,w:180,h:220},{x:360,y:80,w:120,h:260},{x:540,y:220,w:240,h:140},{x:840,y:100,w:150,h:300},{x:100,y:480,w:280,h:160}].forEach(b => {
+        ctxC.beginPath(); ctxC.rect(b.x, b.y, b.w, b.h); ctxC.fill(); ctxC.stroke();
+        ctxC.beginPath(); ctxC.moveTo(b.x, b.y); ctxC.lineTo(b.x + b.w, b.y + b.h);
+        ctxC.strokeStyle = 'rgba(59,130,246,0.02)'; ctxC.stroke();
+      });
+    }
+    drawCity();
+
+    window.addEventListener('resize', () => { resG(); resT(); resC(); drawCity(); });
+  </script>
+</body>
+</html>
