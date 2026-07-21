@@ -110,7 +110,7 @@
     .section {
       padding: 100px 20px;
       border-top: 1px solid var(--border);
-      position: relative; overflow: hidden;
+      position: relative; overflow: visible;
     }
 
     .section-head {
@@ -160,7 +160,7 @@
 
     .photo-frame img {
       position: absolute; width: 100%; height: 100%; object-fit: cover;
-      top: 0; left: 0; display: none;
+      top: 0; left: 0; display: block;
     }
 
     .photo-frame .ph-icon {
@@ -226,27 +226,76 @@
       background: rgba(255,181,222,0.05);
     }
 
-    /* === EDU CARDS (Formación) === */
-    .edu-card {
-      flex-shrink: 0; width: 380px;
-      background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px;
-      padding: 32px 28px; position: relative; overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s;
+    /* === FORMACIÓN — STICKY STACKED CARDS === */
+    .stack-container {
+      display: flex; flex-direction: column; gap: 40px;
+      max-width: 800px; margin: 0 auto;
     }
 
-    .edu-card:hover { border-color: rgba(189,238,99,0.4); transform: translateY(-4px); }
+    .stack-card {
+      position: sticky;
+      top: calc(80px + var(--idx) * 24px);
+      background-color: var(--card-bg);
+      padding: 40px;
+      border-radius: 24px;
+      box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
+      transform: scale(calc(1 - (var(--idx) * 0.01)));
+      filter: brightness(calc(1 - (var(--idx) * 0.03)));
+      display: flex; flex-direction: column; gap: 16px;
+      align-items: flex-start;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
 
-    .edu-card .edu-badge {
+    .stack-card h3 {
+      font-family: 'Bricolage Grotesque', sans-serif;
+      color: var(--card-accent);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 600; letter-spacing: -0.5px;
+      margin: 0;
+    }
+
+    .stack-card .stack-inst {
+      font-weight: 600; font-size: 0.95rem;
+      color: var(--card-accent); opacity: 0.8;
+    }
+
+    .stack-card .stack-yr {
+      font-size: 0.82rem; color: var(--muted);
+    }
+
+    .stack-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .stack-tag {
+      border: 1px solid var(--card-accent);
+      color: var(--card-accent);
+      padding: 5px 16px; border-radius: 50px;
+      font-size: 0.8rem; font-weight: 500;
+    }
+
+    .stack-card p.stack-desc {
+      color: #a1a1aa; line-height: 1.7; font-size: 0.98rem;
+      max-width: 90%; margin: 0;
+    }
+
+    .stack-badge {
       display: inline-block; padding: 5px 14px; border-radius: 50px;
-      font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
-      background: rgba(189,238,99,0.1); border: 1px solid rgba(189,238,99,0.25);
-      color: var(--green); margin-bottom: 14px;
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+      background: rgba(189,238,99,0.12); border: 1px solid rgba(189,238,99,0.3);
+      color: var(--lime);
     }
 
-    .edu-card h3 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.15rem; font-weight: 600; margin-bottom: 6px; letter-spacing: -0.5px; }
-    .edu-card .inst { color: var(--lime); font-weight: 600; font-size: 0.88rem; margin-bottom: 6px; }
-    .edu-card .yr { color: var(--muted); font-size: 0.8rem; margin-bottom: 10px; }
-    .edu-card p.desc { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+    @media (max-width: 600px) {
+      .stack-card { padding: 28px 22px; }
+      .stack-card h3 { font-size: 1.4rem; }
+    }
+
+    /* Estilos para etiquetas de Formación */
+    .edu-tags { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+    .edu-tag {
+      padding: 5px 12px; border-radius: 50px; font-size: 0.7rem; font-weight: 600;
+      border: 1px solid rgba(189,238,99,0.2); color: var(--green);
+      background: rgba(189,238,99,0.05);
+    }
 
     /* === PROJECTS GRID === */
     .projects-grid {
@@ -303,6 +352,16 @@
     .tech-row.ltr { animation: scrollLTR 50s linear infinite; }
     .tech-row.rtl { animation: scrollRTL 50s linear infinite; }
 
+    /* ANIMACIONES PARA LA BARRA DE SUSHI (CONVEYOR) */
+@keyframes scrollLTR {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+@keyframes scrollRTL {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
     .tech-pill {
       flex-shrink: 0; display: flex; align-items: center; gap: 12px;
       padding: 14px 22px; background: rgba(18,18,22,0.8);
@@ -348,7 +407,7 @@
       .hero { padding: 90px 15px 30px; }
       .nav-btn { padding: 8px 10px; font-size: 0.62rem; letter-spacing: 1px; }
       .ws-card { width: 280px; }
-      .edu-card { width: 300px; }
+      
       .projects-grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -369,7 +428,7 @@
 <!-- HERO -->
 <header class="hero">
   <h1>Jessica Ocaña Falcón</h1>
-  <p class="sub">Geomática · Percepción Remota · Deep Learning</p>
+  <p class="sub">Análisis Geoespacial · Ciencia de Datos · GeoAI</p>
   <div class="hero-links">
     <a href="mailto:hifalcon@proton.me" class="hero-link"><i class="fas fa-envelope"></i> Email</a>
     <a href="https://jdofalcon.carrd.co" target="_blank" class="hero-link"><i class="fas fa-globe"></i> Portafolio</a>
@@ -385,14 +444,16 @@
       <div class="section-head" style="text-align:left; margin-bottom:30px;">
         <h2>Sobre <span class="gr-p">Mí</span></h2>
       </div>
-      <p>Gestora ambiental y especialista en geomática con maestría en Ciencias de la Información Geoespacial. Mi trabajo combina tecnologías espaciales, percepción remota y aprendizaje profundo para la conservación, restauración ecológica y monitoreo territorial.</p>
-      <p>Traduzco problemas espaciales complejos en mapas, modelos y sistemas interactivos que ayudan a entender la dinámica de nuestros ecosistemas y territorio.</p>
+      <p>Especialista en análisis geoespacial y ciencia de datos, con maestría en Ciencias de la Información Geoespacial (especialización en Geointeligencia Computacional, CentroGeo) y licenciatura en Gestión Ambiental. Diseño y automatizo flujos de trabajo en SIG — tanto open source (QGIS, PostGIS, GDAL) como privativo (ArcGIS Pro, ENVI) —, modelos de Machine Learning y plataformas de visualización de datos para instituciones de investigación, gobierno y organismos internacionales como PNUD, ECOSUR e INAH.</p>
+      <p>Mi trabajo conecta el análisis territorial con la toma de decisiones: transformo datos espaciales, demográficos y sociales en mapas, dashboards y modelos predictivos que identifican patrones, vulnerabilidades y brechas de acceso. He trabajado en proyectos de percepción remota, monitoreo ambiental, movilidad y análisis de indicadores sociales en cinco estados del sureste de México.</p>
+      <p>Combino dominio técnico (Python, R, SQL, QGIS, PostGIS, Google Earth Engine) con experiencia en investigación aplicada y comunicación de resultados a audiencias técnicas y no técnicas — llevando proyectos desde el análisis exploratorio hasta la entrega de productos cartográficos y sistemas automatizados listos para producción.</p>
       <div class="tags">
-        <span class="tag">Percepción Remota</span>
-        <span class="tag">Deep Learning</span>
-        <span class="tag">Ecosistemas Costeros</span>
-        <span class="tag">Automatización GIS</span>
-        <span class="tag">Monitoreo Forestal</span>
+        <span class="tag">Análisis Geoespacial</span>
+        <span class="tag">Ciencia de Datos</span>
+        <span class="tag">GeoAI</span>
+        <span class="tag">SIG Open Source & Privativo</span>
+        <span class="tag">Automatización Cartográfica</span>
+        <span class="tag">Visualización de Datos</span>
       </div>
     </div>
     <div class="photo-frame">
@@ -413,11 +474,19 @@
 
   <div class="ws-grid">
 
-    <a href="curso-pyqgis.html" class="ws-card ws-card--link">
+    <a href="https://jdanifalcon.github.io/curso-pyqgis/" target="_blank" class="ws-card ws-card--link">
       <div class="ws-icon"><i class="fab fa-python"></i></div>
       <h3>Python en QGIS</h3>
       <p>Automatización de geoprocesos con PyQGIS: desde fundamentos de Python hasta scripts avanzados de procesamiento masivo.</p>
       <div class="ws-tags"><span class="ws-tag">Python</span><span class="ws-tag">QGIS</span><span class="ws-tag">4 módulos</span></div>
+      <span class="ws-link-hint">Ver temario <i class="fas fa-arrow-right"></i></span>
+    </a>
+
+    <a href="https://jdanifalcon.github.io/curso-postgis-01/" target="_blank" class="ws-card ws-card--link">
+      <div class="ws-icon"><i class="fas fa-database"></i></div>
+      <h3>PostGIS Esencial</h3>
+      <p>Fundamentos de bases de datos espaciales: carga de datos, consultas SQL espaciales y análisis geoespacial con PostgreSQL/PostGIS.</p>
+      <div class="ws-tags"><span class="ws-tag">SQL</span><span class="ws-tag">PostGIS</span><span class="ws-tag">5 sesiones</span></div>
       <span class="ws-link-hint">Ver temario <i class="fas fa-arrow-right"></i></span>
     </a>
 
@@ -433,48 +502,6 @@
       <h3>QGIS Básico</h3>
       <p>Creación de capas vectoriales, manipulación de rasters, georreferenciación y salida cartográfica profesional.</p>
       <div class="ws-tags"><span class="ws-tag">QGIS</span><span class="ws-tag">SIG</span></div>
-    </div>
-
-    <div class="ws-card">
-      <div class="ws-icon"><i class="fas fa-book-open"></i></div>
-      <h3>Atlas en QGIS</h3>
-      <p>Generación automatizada de mapas temáticos personalizados mediante la herramienta Atlas para entregas masivas.</p>
-      <div class="ws-tags"><span class="ws-tag">Automatización</span><span class="ws-tag">Cartografía</span></div>
-    </div>
-
-    <div class="ws-card">
-      <div class="ws-icon"><i class="fas fa-database"></i></div>
-      <h3>PostgreSQL / PostGIS</h3>
-      <p>Bases de datos espaciales: carga, consultas SQL, análisis espacial y optimización para proyectos geoespaciales.</p>
-      <div class="ws-tags"><span class="ws-tag">SQL</span><span class="ws-tag">PostGIS</span></div>
-    </div>
-
-    <div class="ws-card">
-      <div class="ws-icon"><i class="fas fa-satellite"></i></div>
-      <h3>Google Earth Engine</h3>
-      <p>Procesamiento de imágenes satelitales a escala planetaria para monitoreo ambiental y detección de cambios.</p>
-      <div class="ws-tags"><span class="ws-tag">GEE</span><span class="ws-tag">JavaScript</span></div>
-    </div>
-
-    <div class="ws-card">
-      <div class="ws-icon"><i class="fas fa-brain"></i></div>
-      <h3>Deep Learning Geoespacial</h3>
-      <p>Redes neuronales convolucionales aplicadas a segmentación de imágenes satelitales y detección de coberturas.</p>
-      <div class="ws-tags"><span class="ws-tag">PyTorch</span><span class="ws-tag">U-Net</span></div>
-    </div>
-
-    <div class="ws-card">
-      <div class="ws-icon"><i class="fas fa-layer-group"></i></div>
-      <h3>Percepción Remota</h3>
-      <p>Fundamentos de teledetección, índices espectrales, composición de bandas y análisis multitemporal.</p>
-      <div class="ws-tags"><span class="ws-tag">Sentinel-2</span><span class="ws-tag">Landsat</span></div>
-    </div>
-
-    <div class="ws-card">
-      <div class="ws-icon"><i class="fab fa-r-project"></i></div>
-      <h3>R Shiny Apps</h3>
-      <p>Desarrollo de aplicaciones web interactivas con R Shiny para visualización de datos ambientales.</p>
-      <div class="ws-tags"><span class="ws-tag">R Shiny</span><span class="ws-tag">Apps</span></div>
     </div>
 
   </div>
@@ -514,23 +541,63 @@
   </div>
 </section>
 
-<!-- FORMACIÓN — MARQUEE ROWS -->
-<section id="formacion" class="marquee-section">
+<!-- FORMACIÓN — STACKED STICKY CARDS -->
+<section id="formacion" class="section" style="padding-bottom: 200px;">
   <div class="section-head">
     <h2>Formación <span class="gr-g">Académica</span></h2>
     <p>Trayectoria formativa en geociencias, gestión ambiental y geointeligencia computacional.</p>
   </div>
 
-  <div class="marquee-row ltr" style="animation-duration:35s;">
-    <div class="edu-card"><span class="edu-badge">En proceso de titulación</span><h3>Maestría en Ciencias de la Información Geoespacial</h3><p class="inst">CentroGeo</p><p class="yr">2023 – 2025</p><p class="desc">Geointeligencia Computacional. Tesis: segmentación semántica con redes neuronales profundas para análisis de la línea costera de Yucatán.</p></div>
-    <div class="edu-card"><h3>Licenciatura en Gestión Ambiental</h3><p class="inst">UJAT</p><p class="yr">2014 – 2020</p><p class="desc">Manejo de ecosistemas, planeación sustentable y aplicación cartográfica ambiental.</p></div>
-    <div class="edu-card"><h3>Diplomado en Restauración Ecológica</h3><p class="inst">INECOL</p><p class="desc">Modelado del paisaje, valoración y recuperación funcional de ecosistemas degradados.</p></div>
-    <div class="edu-card"><h3>Jr ML Engineer</h3><p class="inst">Omdena — Tanzania Deforestation Challenge</p><p class="yr">Jun – Sep 2023</p><p class="desc">IA centrada en manglares para monitoreo de carbono y mitigación de deforestación con Deep Learning.</p></div>
-    <!-- DUPLICATES -->
-    <div class="edu-card"><span class="edu-badge">En proceso de titulación</span><h3>Maestría en Ciencias de la Información Geoespacial</h3><p class="inst">CentroGeo</p><p class="yr">2023 – 2025</p><p class="desc">Geointeligencia Computacional. Tesis: segmentación semántica con redes neuronales profundas para análisis de la línea costera de Yucatán.</p></div>
-    <div class="edu-card"><h3>Licenciatura en Gestión Ambiental</h3><p class="inst">UJAT</p><p class="yr">2014 – 2020</p><p class="desc">Manejo de ecosistemas, planeación sustentable y aplicación cartográfica ambiental.</p></div>
-    <div class="edu-card"><h3>Diplomado en Restauración Ecológica</h3><p class="inst">INECOL</p><p class="desc">Modelado del paisaje, valoración y recuperación funcional de ecosistemas degradados.</p></div>
-    <div class="edu-card"><h3>Jr ML Engineer</h3><p class="inst">Omdena — Tanzania Deforestation Challenge</p><p class="yr">Jun – Sep 2023</p><p class="desc">IA centrada en manglares para monitoreo de carbono y mitigación de deforestación con Deep Learning.</p></div>
+  <div class="stack-container">
+
+    <article class="stack-card" style="--idx: 0; --card-bg: #151a14; --card-accent: #c4f069;">
+      <span class="stack-badge">En proceso de titulación</span>
+      <h3>Maestría en Ciencias de la Información Geoespacial</h3>
+      <span class="stack-inst">CentroGeo</span>
+      <span class="stack-yr">2023 – 2025</span>
+      <div class="stack-tags">
+        <span class="stack-tag">Geointeligencia Computacional</span>
+        <span class="stack-tag">Deep Learning</span>
+        <span class="stack-tag">Percepción Remota</span>
+      </div>
+      <p class="stack-desc">Especialización en Geointeligencia Computacional. Tesis: segmentación semántica con redes neuronales profundas (U-Net) aplicada al análisis de la evolución de la línea costera de Yucatán con imágenes Sentinel-2.</p>
+    </article>
+
+    <article class="stack-card" style="--idx: 1; --card-bg: #1d1527; --card-accent: #f490ff;">
+      <h3>Licenciatura en Gestión Ambiental</h3>
+      <span class="stack-inst">Universidad Juárez Autónoma de Tabasco (UJAT)</span>
+      <span class="stack-yr">2014 – 2020</span>
+      <div class="stack-tags">
+        <span class="stack-tag">Gestión Ambiental</span>
+        <span class="stack-tag">Ecosistemas</span>
+        <span class="stack-tag">Cartografía</span>
+      </div>
+      <p class="stack-desc">Formación en manejo de ecosistemas, planeación sustentable, diagnóstico ambiental y aplicación cartográfica para el análisis territorial.</p>
+    </article>
+
+    <article class="stack-card" style="--idx: 2; --card-bg: #0f172a; --card-accent: #38bdf8;">
+      <h3>Diplomado en Restauración Ecológica y Servicios Ambientales</h3>
+      <span class="stack-inst">Instituto de Ecología, A.C. (INECOL)</span>
+      <div class="stack-tags">
+        <span class="stack-tag">Restauración</span>
+        <span class="stack-tag">Servicios Ecosistémicos</span>
+        <span class="stack-tag">Paisaje</span>
+      </div>
+      <p class="stack-desc">Modelado del paisaje, valoración y recuperación funcional de ecosistemas degradados. Análisis de servicios ambientales y estrategias de restauración ecológica.</p>
+    </article>
+
+    <article class="stack-card" style="--idx: 3; --card-bg: #1a1510; --card-accent: #fbbf24;">
+      <h3>Jr ML Engineer — Tanzania Deforestation Challenge</h3>
+      <span class="stack-inst">Omdena (Proyecto colaborativo internacional)</span>
+      <span class="stack-yr">Jun – Sep 2023</span>
+      <div class="stack-tags">
+        <span class="stack-tag">Deep Learning</span>
+        <span class="stack-tag">Manglares</span>
+        <span class="stack-tag">Deforestación</span>
+      </div>
+      <p class="stack-desc">Proyecto piloto de IA centrado en manglares para monitoreo nacional de carbono y mitigación de deforestación en Tanzania con imágenes satelitales.</p>
+    </article>
+
   </div>
 </section>
 
@@ -596,5 +663,4 @@
   });
 </script>
 </body>
-</html>
 </html>
