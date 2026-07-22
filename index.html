@@ -54,56 +54,47 @@
 
     /* === LANG SWITCH === */
     .lang-switch {
-      position: fixed; 
-      top: 15px; /* Alineado verticalmente con la nueva barra */
-      right: 30px; 
-      z-index: 1000;
-      display: flex; gap: 10px;
+      position: fixed; top: 16px; right: 20px; z-index: 1000;
+      display: flex; gap: 4px;
+      background: rgba(10,22,40,0.9);
+      border: 1px solid var(--border);
+      border-radius: 50px; padding: 3px;
+      backdrop-filter: blur(16px);
     }
     .lang-btn {
-      padding: 0; border: none;
-      font-size: 0.75rem; font-weight: 700; letter-spacing: 1px;
-      color: var(--muted);
+      padding: 6px 14px; border-radius: 50px; border: none;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--muted);
       background: transparent; cursor: pointer;
       transition: all 0.3s;
     }
-    .lang-btn.active, .lang-btn:hover { color: var(--gold); }
+    .lang-btn.active { background: var(--gold); color: #0a1628; }
 
     /* === NAV === */
     .nav-container {
-      position: fixed; /* Pegado siempre arriba */
-      top: 0; left: 0; right: 0;
-      z-index: 999;
-      height: 60px; /* Muy delgada */
-      background: rgba(10,22,40,0.8); /* Semitransparente */
-      backdrop-filter: blur(10px); /* Efecto cristal */
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      display: flex; align-items: center; justify-content: center;
+      position: sticky; top: 16px; z-index: 999;
+      max-width: 900px; margin: 0 auto; padding: 0 20px;
     }
     .nav-bar {
-      display: flex; gap: 30px;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      background: rgba(10,22,40,0.92);
+      border: 1px solid var(--border);
+      border-radius: 50px; padding: 6px 10px;
+      backdrop-filter: blur(20px);
     }
     .nav-btn {
-      font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px;
+      padding: 10px 18px; border-radius: 50px;
+      font-size: 0.73rem; font-weight: 700; letter-spacing: 1.2px;
       text-transform: uppercase; color: var(--muted);
       transition: all 0.3s;
-      position: relative;
-      padding: 5px 0; /* Quitamos el fondo de pastilla */
     }
-    
-    /* Efecto de subrayado elegante al pasar el mouse o estar activo (como en Dig Deeper) */
-    .nav-btn::after {
-      content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px; 
-      background: var(--gold); transition: width 0.3s ease;
-    }
-    .nav-btn.active, .nav-btn:hover { color: var(--gold); background: transparent; }
-    .nav-btn.active::after, .nav-btn:hover::after { width: 100%; }
+    .nav-btn.active { background: var(--gold); color: #0a1628; }
+    .nav-btn:hover:not(.active) { color: var(--cream); }
 
     /* === HERO === */
     .hero {
       text-align: center;
-      /* Ajustamos el espacio: 140px arriba para librar la barra, 60px abajo para que no quite tanto espacio */
-      padding: 140px 20px 60px; 
+      padding: 90px 20px 20px;
       position: relative;
     }
     .hero h1 {
@@ -151,16 +142,10 @@
     /* === ABOUT === */
     .about-grid {
       max-width: 1100px; margin: 0 auto;
-  /* Cambiamos la proporción de 1.3/0.7 a 1.2/0.8 para darle un poco más de presencia a la foto */
-      display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 50px; align-items: center;
-}
+      display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 60px; align-items: center;
+    }
     @media (max-width: 850px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
-    .about-text p { 
-      color: var(--text); /* Cambiar a var(--text) lo hará un poquito más claro y legible */
-      font-size: 1.08rem; /* Un poco más grande para mejor lectura */
-      line-height: 1.8; 
-      margin-bottom: 20px; 
-}
+    .about-text p { color: var(--muted); font-size: 1.02rem; line-height: 1.85; margin-bottom: 18px; }
     .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
     .tag {
       padding: 8px 18px; border-radius: 50px;
@@ -170,18 +155,12 @@
       background: rgba(201,168,76,0.06);
     }
     .photo-frame {
-  border: 2px solid rgba(201,168,76,0.4); /* Subí un poco la opacidad del borde para que resalte más */
-  border-radius: 50%; /* Esto convierte el contenedor en un círculo o un óvalo */
-  aspect-ratio: 3/4; /* Cambia a 1/1 si prefieres un círculo perfecto, 3/4 es un óvalo vertical tipo retrato */
-  display: flex; 
-  flex-direction: column;
-  align-items: center; 
-  justify-content: center;
-  background: rgba(201,168,76,0.02);
-  position: relative; 
-  overflow: hidden;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.4); /* Sombra suave para que no se vea tan plano */
-}
+      border: 2px solid rgba(201,168,76,0.2); border-radius: 20px;
+      aspect-ratio: 1/1.1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      background: rgba(201,168,76,0.02);
+      position: relative; overflow: hidden;
+    }
     .photo-frame img {
       position: absolute; width: 100%; height: 100%; object-fit: cover;
       top: 0; left: 0; display: block;
@@ -198,20 +177,17 @@
       display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;
     }
     .ws-card {
-  background: var(--bg-card); 
-  border: 1px solid var(--border); 
-  border-radius: 32px; /* Aumentamos el redondeo, antes era 20px */
-  padding: 35px 30px; /* Un poco más de espacio interno para compensar las curvas */
-  position: relative; 
-  overflow: hidden;
-  transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.ws-card:hover { 
-  border-color: var(--gold); /* Un brillo más notorio en el borde */
-  transform: translateY(-8px); /* Sube un poco más al pasar el mouse */
-  box-shadow: 0 15px 30px rgba(0,0,0,0.4); /* Sombra elegante para dar profundidad */
-}
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px;
+      padding: 30px 26px; position: relative; overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .ws-card:hover { border-color: var(--gold-dim); transform: translateY(-4px); }
+    .ws-card--link {
+      display: flex; flex-direction: column;
+      text-decoration: none; color: inherit; cursor: pointer;
+      border-color: var(--gold-dim);
+      background: rgba(201,168,76,0.04);
+    }
     .ws-card--link:hover { border-color: var(--gold); }
     .ws-link-hint {
       margin-top: auto; padding-top: 16px;
@@ -221,25 +197,12 @@
     }
     .ws-card--link:hover .ws-link-hint { gap: 14px; }
     .ws-card .ws-icon {
-      width: 54px; /* Ligeramente más grande, antes era 48px */
-      height: 54px; 
-      border-radius: 50%; /* Esto los hace círculos perfectos */
-      display: flex; 
-      align-items: center; 
-      justify-content: center;
-      margin-bottom: 22px; 
-      font-size: 1.4rem; /* Icono un poco más grande */
-      background: rgba(201,168,76,0.08); 
-      color: var(--gold);
+      width: 48px; height: 48px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px; font-size: 1.3rem;
+      background: rgba(201,168,76,0.08); color: var(--gold);
       border: 1px solid var(--gold-dim);
-      transition: transform 0.3s ease, background 0.3s ease;
-}
-
-/* Efecto extra: que el ícono crezca un poquito cuando pasas el mouse sobre la tarjeta */
-    .ws-card:hover .ws-icon {
-      transform: scale(1.1);
-      background: rgba(201,168,76,0.15);
-}
+    }
     .ws-card h3 { font-family: 'Righteous', sans-serif; font-size: 1.2rem; font-weight: 400; margin-bottom: 10px; color: var(--cream); }
     .ws-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
     .ws-card .ws-tags { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
@@ -452,23 +415,19 @@
         <span class="tag">Data Visualization</span>
       </div>
     </div>
-    <div style="display: flex; flex-direction: column; gap: 20px; align-items: center;">
-      <!-- Tu foto ovalada -->
-      <div class="photo-frame">
-        <img src="images/jessica-photo.jpg" alt="Jessica Ocaña Falcón">
-        <div class="ph-icon"><i class="fas fa-satellite-dish"></i></div>
-        <h4 data-lang="en">Your Photo Here</h4><h4 data-lang="es">Tu Foto Aquí</h4>
-        <p data-lang="en">(Replace with your image)</p><p data-lang="es">(Reemplaza con tu imagen)</p>
-      </div>
-      
-      <!-- Botones reubicados debajo de la foto -->
-      <div class="hero-links">
-        <a href="mailto:hifalcon@proton.me" class="hero-link"><i class="fas fa-envelope"></i> Email</a>
-        <a href="https://jdofalcon.carrd.co" target="_blank" class="hero-link"><i class="fas fa-globe"></i> Portfolio</a>
-        <a href="https://github.com/jdanifalcon" target="_blank" class="hero-link"><i class="fab fa-github"></i> GitHub</a>
-        <a href="https://linkedin.com/in/jdofalcon" target="_blank" class="hero-link"><i class="fab fa-linkedin"></i> LinkedIn</a>
-      </div>
+    <div class="photo-frame">
+      <img src="images/jessica-photo.jpg" alt="Jessica Ocaña Falcón">
+      <div class="ph-icon"><i class="fas fa-satellite-dish"></i></div>
+      <h4 data-lang="en">Your Photo Here</h4><h4 data-lang="es">Tu Foto Aquí</h4>
+      <p data-lang="en">(Replace with your image)</p><p data-lang="es">(Reemplaza con tu imagen)</p>
     </div>
+    <div class="hero-links" style="justify-content: center; margin-top: 24px;">
+      <a href="mailto:hifalcon@proton.me" class="hero-link"><i class="fas fa-envelope"></i> Email</a>
+      <a href="https://jdofalcon.carrd.co" target="_blank" class="hero-link"><i class="fas fa-globe"></i> Portfolio</a>
+      <a href="https://github.com/jdanifalcon" target="_blank" class="hero-link"><i class="fab fa-github"></i> GitHub</a>
+      <a href="https://linkedin.com/in/jdofalcon" target="_blank" class="hero-link"><i class="fab fa-linkedin"></i> LinkedIn</a>
+    </div>
+  </div>
 </section>
 
 <!-- WORKSHOPS -->
