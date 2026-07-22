@@ -189,17 +189,20 @@
       display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;
     }
     .ws-card {
-      background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px;
-      padding: 30px 26px; position: relative; overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-    .ws-card:hover { border-color: var(--gold-dim); transform: translateY(-4px); }
-    .ws-card--link {
-      display: flex; flex-direction: column;
-      text-decoration: none; color: inherit; cursor: pointer;
-      border-color: var(--gold-dim);
-      background: rgba(201,168,76,0.04);
-    }
+  background: var(--bg-card); 
+  border: 1px solid var(--border); 
+  border-radius: 32px; /* Aumentamos el redondeo, antes era 20px */
+  padding: 35px 30px; /* Un poco más de espacio interno para compensar las curvas */
+  position: relative; 
+  overflow: hidden;
+  transition: border-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.ws-card:hover { 
+  border-color: var(--gold); /* Un brillo más notorio en el borde */
+  transform: translateY(-8px); /* Sube un poco más al pasar el mouse */
+  box-shadow: 0 15px 30px rgba(0,0,0,0.4); /* Sombra elegante para dar profundidad */
+}
     .ws-card--link:hover { border-color: var(--gold); }
     .ws-link-hint {
       margin-top: auto; padding-top: 16px;
@@ -209,12 +212,25 @@
     }
     .ws-card--link:hover .ws-link-hint { gap: 14px; }
     .ws-card .ws-icon {
-      width: 48px; height: 48px; border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 20px; font-size: 1.3rem;
-      background: rgba(201,168,76,0.08); color: var(--gold);
+      width: 54px; /* Ligeramente más grande, antes era 48px */
+      height: 54px; 
+      border-radius: 50%; /* Esto los hace círculos perfectos */
+      display: flex; 
+      align-items: center; 
+      justify-content: center;
+      margin-bottom: 22px; 
+      font-size: 1.4rem; /* Icono un poco más grande */
+      background: rgba(201,168,76,0.08); 
+      color: var(--gold);
       border: 1px solid var(--gold-dim);
-    }
+      transition: transform 0.3s ease, background 0.3s ease;
+}
+
+/* Efecto extra: que el ícono crezca un poquito cuando pasas el mouse sobre la tarjeta */
+    .ws-card:hover .ws-icon {
+      transform: scale(1.1);
+      background: rgba(201,168,76,0.15);
+}
     .ws-card h3 { font-family: 'Righteous', sans-serif; font-size: 1.2rem; font-weight: 400; margin-bottom: 10px; color: var(--cream); }
     .ws-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
     .ws-card .ws-tags { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
