@@ -11,7 +11,7 @@
   <style>
     :root {
       --bg: #0a1628;
-      --bg-card: rgba(10,22,40,0.85);
+      --bg-card: rgba(10,22,40,0.88);
       --gold: #c9a84c;
       --gold-dim: rgba(201,168,76,0.25);
       --cream: #e8dcc8;
@@ -22,10 +22,8 @@
       --border: rgba(201,168,76,0.12);
       --overlay: rgba(10,22,40,0.88);
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-
     body {
       font-family: 'Nunito', sans-serif;
       background: var(--bg);
@@ -38,7 +36,6 @@
       background-attachment: fixed;
       background-position: center;
     }
-
     body::before {
       content: '';
       position: fixed;
@@ -47,305 +44,216 @@
       z-index: 0;
       pointer-events: none;
     }
-
     body > * { position: relative; z-index: 1; }
-
     a { text-decoration: none; color: inherit; }
 
-    /* === LANG SWITCH === */
-    .lang-switch {
-      position: fixed; top: 16px; right: 20px; z-index: 1000;
-      display: flex; gap: 4px;
-      background: rgba(10,22,40,0.9);
-      border: 1px solid var(--border);
-      border-radius: 50px; padding: 3px;
-      backdrop-filter: blur(16px);
+    /* === HEADER — Christy style === */
+    .site-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 24px 48px;
+      background: rgba(10,22,40,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .site-title {
+      font-family: 'Righteous', sans-serif;
+      font-size: 1.2rem; font-weight: 400;
+      color: var(--gold);
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+    .site-nav {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .site-nav a {
+      padding: 6px 14px;
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.5px;
+      color: var(--muted);
+      transition: color 0.3s;
+      border-bottom: 2px solid transparent;
+    }
+    .site-nav a:hover, .site-nav a.active {
+      color: var(--cream);
+      border-bottom-color: var(--gold);
+    }
+    .nav-divider {
+      width: 1px; height: 16px; background: var(--border); margin: 0 4px;
+    }
+    .lang-toggle {
+      display: flex; gap: 2px;
+      background: rgba(201,168,76,0.08);
+      border: 1px solid var(--gold-dim);
+      border-radius: 50px; padding: 2px;
     }
     .lang-btn {
-      padding: 6px 14px; border-radius: 50px; border: none;
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 1px;
-      text-transform: uppercase; color: var(--muted);
-      background: transparent; cursor: pointer;
+      padding: 4px 10px; border-radius: 50px; border: none;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 1px;
+      color: var(--muted); background: transparent; cursor: pointer;
       transition: all 0.3s;
     }
     .lang-btn.active { background: var(--gold); color: #0a1628; }
 
-    /* === NAV === */
-    .nav-container {
-      position: sticky; top: 16px; z-index: 999;
-      max-width: 900px; margin: 0 auto; padding: 0 20px;
+    /* Mobile nav */
+    @media (max-width: 768px) {
+      .site-header { padding: 16px 20px; }
+      .site-title { font-size: 1rem; }
+      .site-nav { gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+      .site-nav a { padding: 4px 8px; font-size: 0.68rem; }
     }
-    .nav-bar {
-      display: flex; align-items: center; justify-content: center; gap: 6px;
-      background: rgba(10,22,40,0.92);
-      border: 1px solid var(--border);
-      border-radius: 50px; padding: 6px 10px;
-      backdrop-filter: blur(20px);
-    }
-    .nav-btn {
-      padding: 10px 18px; border-radius: 50px;
-      font-size: 0.73rem; font-weight: 700; letter-spacing: 1.2px;
-      text-transform: uppercase; color: var(--muted);
-      transition: all 0.3s;
-    }
-    .nav-btn.active { background: var(--gold); color: #0a1628; }
-    .nav-btn:hover:not(.active) { color: var(--cream); }
-
-    /* === HERO === */
-    .hero {
-      text-align: center;
-      padding: 90px 20px 20px;
-      position: relative;
-    }
-    .hero h1 {
-      font-family: 'Righteous', sans-serif;
-      font-size: clamp(2.6rem, 5.5vw, 5rem);
-      font-weight: 400; letter-spacing: 1px;
-      color: var(--gold);
-      margin-bottom: 14px;
-      line-height: 1.1;
-    }
-    .hero .sub {
-      font-size: 0.9rem; letter-spacing: 4px; text-transform: uppercase;
-      color: var(--muted); font-weight: 500; margin-bottom: 30px;
-    }
-    .hero-links {
-      display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;
-    }
-    .hero-link {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 10px 20px; border: 1px solid var(--gold-dim); border-radius: 50px;
-      font-size: 0.78rem; font-weight: 600; color: var(--muted);
-      transition: all 0.3s;
-    }
-    .hero-link:hover { border-color: var(--gold); color: var(--gold); }
 
     /* === SECTIONS === */
     .section {
-      padding: 100px 20px;
-      border-top: 1px solid var(--border);
-      position: relative; overflow: visible;
+      min-height: 100vh;
+      padding: 120px 48px 80px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
     }
-    .section-head {
-      text-align: center; margin-bottom: 60px;
+    .section-inner { max-width: 1100px; width: 100%; }
+    @media (max-width: 768px) { .section { padding: 100px 20px 60px; } }
+
+    .section-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
     }
-    .section-head h2 {
+    .section-title {
       font-family: 'Righteous', sans-serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      font-weight: 400; margin-bottom: 12px;
-      letter-spacing: 0.5px; line-height: 1.15;
-      color: var(--cream);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 400; color: var(--cream);
+      line-height: 1.15; margin-bottom: 40px;
     }
-    .section-head h2 .accent { color: var(--gold); }
-    .section-head p { color: var(--muted); font-size: 0.95rem; max-width: 600px; margin: 0 auto; }
+    .section-title .accent { color: var(--gold); }
 
     /* === ABOUT === */
     .about-grid {
-      max-width: 1100px; margin: 0 auto;
-      display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 60px; align-items: center;
+      display: grid; grid-template-columns: 1fr 0.8fr; gap: 60px; align-items: start;
     }
     @media (max-width: 850px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
-    .about-text p { color: var(--muted); font-size: 1.02rem; line-height: 1.85; margin-bottom: 18px; }
-    .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .about-text p { color: var(--muted); font-size: 1rem; line-height: 1.85; margin-bottom: 18px; }
+    .about-photo {
+      position: sticky; top: 100px;
+    }
+    .about-photo img {
+      width: 100%; border-radius: 16px;
+      border: 2px solid rgba(201,168,76,0.15);
+      aspect-ratio: 3/4; object-fit: cover;
+    }
+    .about-photo .placeholder {
+      width: 100%; aspect-ratio: 3/4; border-radius: 16px;
+      border: 2px solid rgba(201,168,76,0.15);
+      background: rgba(201,168,76,0.03);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: var(--muted); font-size: 0.9rem;
+    }
+    .about-photo .placeholder i { font-size: 2.5rem; color: var(--gold); margin-bottom: 12px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
     .tag {
-      padding: 8px 18px; border-radius: 50px;
-      font-size: 0.76rem; font-weight: 600; letter-spacing: 0.5px;
-      border: 1px solid var(--gold-dim);
-      color: var(--gold);
-      background: rgba(201,168,76,0.06);
+      padding: 7px 16px; border-radius: 50px;
+      font-size: 0.74rem; font-weight: 600; letter-spacing: 0.5px;
+      border: 1px solid var(--gold-dim); color: var(--gold);
+      background: rgba(201,168,76,0.05);
     }
-    .photo-frame {
-      border: 2px solid rgba(201,168,76,0.2); border-radius: 20px;
-      aspect-ratio: 1/1.1; display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      background: rgba(201,168,76,0.02);
-      position: relative; overflow: hidden;
-    }
-    .photo-frame img {
-      position: absolute; width: 100%; height: 100%; object-fit: cover;
-      top: 0; left: 0; display: block;
-    }
-    .photo-frame .ph-icon {
-      font-size: 3rem; margin-bottom: 12px; color: var(--gold);
-    }
-    .photo-frame h4 { font-size: 0.9rem; color: var(--cream); }
-    .photo-frame p { font-size: 0.78rem; color: var(--muted); }
 
-    /* === WORKSHOP GRID === */
+    /* === WORK GRID (experience) === */
+    .work-grid { display: flex; flex-direction: column; gap: 48px; }
+    .work-item {
+      display: grid; grid-template-columns: 200px 1fr; gap: 32px;
+      padding-bottom: 48px; border-bottom: 1px solid var(--border);
+    }
+    .work-item:last-child { border-bottom: none; padding-bottom: 0; }
+    @media (max-width: 700px) { .work-item { grid-template-columns: 1fr; gap: 12px; } }
+    .work-date { font-size: 0.82rem; color: var(--muted); font-weight: 600; padding-top: 4px; }
+    .work-content h3 {
+      font-family: 'Righteous', sans-serif; font-size: 1.15rem;
+      font-weight: 400; color: var(--cream); margin-bottom: 4px;
+    }
+    .work-org { font-size: 0.88rem; color: var(--gold); font-weight: 600; margin-bottom: 12px; }
+    .work-desc { color: var(--muted); font-size: 0.92rem; line-height: 1.7; }
+    .work-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+    .work-tag {
+      padding: 4px 12px; border-radius: 50px; font-size: 0.7rem; font-weight: 600;
+      border: 1px solid var(--teal-dim); color: var(--teal); background: rgba(45,125,154,0.05);
+    }
+
+    /* === EDUCATION === */
+    .edu-cards { display: flex; flex-direction: column; gap: 24px; margin-bottom: 60px; }
+    .edu-card {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px;
+      padding: 32px; transition: border-color 0.3s;
+    }
+    .edu-card:hover { border-color: var(--gold-dim); }
+    .edu-badge {
+      display: inline-block; padding: 4px 12px; border-radius: 50px;
+      font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+      background: rgba(201,168,76,0.1); border: 1px solid var(--gold-dim);
+      color: var(--gold); margin-bottom: 12px;
+    }
+    .edu-card h3 { font-family: 'Righteous', sans-serif; font-size: 1.2rem; font-weight: 400; color: var(--cream); margin-bottom: 4px; }
+    .edu-card .edu-inst { font-size: 0.88rem; color: var(--gold); font-weight: 600; }
+    .edu-card .edu-yr { font-size: 0.82rem; color: var(--muted); margin-bottom: 10px; }
+    .edu-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+
+    /* Tech conveyor inside education */
+    .tech-label { margin-bottom: 24px; }
+    .tech-row { display: flex; gap: 16px; width: max-content; padding: 8px 0; animation: scrollLTR 45s linear infinite; }
+    @keyframes scrollLTR { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+    .tech-pill {
+      flex-shrink: 0; display: flex; align-items: center; gap: 10px;
+      padding: 12px 20px; background: rgba(10,22,40,0.8);
+      border: 1px solid var(--border); border-radius: 12px;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .tech-pill:hover { transform: translateY(-3px); border-color: var(--gold); }
+    .tech-pill i { font-size: 1.4rem; color: var(--gold); }
+    .tech-pill span { font-weight: 700; font-size: 0.85rem; }
+    .tech-wrap { overflow: hidden; }
+
+    /* === WORKSHOPS === */
     .ws-grid {
-      max-width: 1100px; margin: 0 auto;
       display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;
     }
     .ws-card {
       background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px;
-      padding: 30px 26px; position: relative; overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s;
+      padding: 28px 24px; transition: border-color 0.3s, transform 0.3s;
     }
     .ws-card:hover { border-color: var(--gold-dim); transform: translateY(-4px); }
-    .ws-card--link {
-      display: flex; flex-direction: column;
-      text-decoration: none; color: inherit; cursor: pointer;
-      border-color: var(--gold-dim);
-      background: rgba(201,168,76,0.04);
-    }
+    .ws-card--link { display: flex; flex-direction: column; text-decoration: none; color: inherit; cursor: pointer; border-color: var(--gold-dim); background: rgba(201,168,76,0.03); }
     .ws-card--link:hover { border-color: var(--gold); }
-    .ws-link-hint {
-      margin-top: auto; padding-top: 16px;
-      font-size: 0.82rem; font-weight: 600; color: var(--gold);
-      display: flex; align-items: center; gap: 8px;
-      transition: gap 0.3s;
-    }
+    .ws-link-hint { margin-top: auto; padding-top: 14px; font-size: 0.82rem; font-weight: 600; color: var(--gold); display: flex; align-items: center; gap: 8px; transition: gap 0.3s; }
     .ws-card--link:hover .ws-link-hint { gap: 14px; }
-    .ws-card .ws-icon {
-      width: 48px; height: 48px; border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 20px; font-size: 1.3rem;
-      background: rgba(201,168,76,0.08); color: var(--gold);
-      border: 1px solid var(--gold-dim);
-    }
-    .ws-card h3 { font-family: 'Righteous', sans-serif; font-size: 1.2rem; font-weight: 400; margin-bottom: 10px; color: var(--cream); }
-    .ws-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
-    .ws-card .ws-tags { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
-    .ws-tag {
-      padding: 5px 12px; border-radius: 50px; font-size: 0.7rem; font-weight: 600;
-      border: 1px solid var(--teal-dim); color: var(--teal);
-      background: rgba(45,125,154,0.05);
-    }
+    .ws-card .ws-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; font-size: 1.2rem; background: rgba(201,168,76,0.08); color: var(--gold); border: 1px solid var(--gold-dim); }
+    .ws-card h3 { font-family: 'Righteous', sans-serif; font-size: 1.1rem; font-weight: 400; margin-bottom: 8px; color: var(--cream); }
+    .ws-card p { font-size: 0.86rem; color: var(--muted); line-height: 1.6; }
+    .ws-tags { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+    .ws-tag { padding: 4px 12px; border-radius: 50px; font-size: 0.68rem; font-weight: 600; border: 1px solid var(--teal-dim); color: var(--teal); background: rgba(45,125,154,0.05); }
 
-    /* === FORMACIÓN — STICKY STACKED CARDS === */
-    .stack-container {
-      display: flex; flex-direction: column; gap: 40px;
-      max-width: 800px; margin: 0 auto;
-    }
-    .stack-card {
-      position: sticky;
-      top: calc(80px + var(--idx) * 24px);
-      background-color: var(--card-bg);
-      padding: 40px;
-      border-radius: 24px;
-      box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
-      transform: scale(calc(1 - (var(--idx) * 0.01)));
-      filter: brightness(calc(1 - (var(--idx) * 0.03)));
-      display: flex; flex-direction: column; gap: 16px;
-      align-items: flex-start;
-      border: 1px solid rgba(201,168,76,0.08);
-    }
-    .stack-card h3 {
-      font-family: 'Righteous', sans-serif;
-      color: var(--card-accent);
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      font-weight: 400; letter-spacing: 0.5px;
-      margin: 0;
-    }
-    .stack-card .stack-inst { font-weight: 600; font-size: 0.95rem; color: var(--card-accent); opacity: 0.8; }
-    .stack-card .stack-yr { font-size: 0.82rem; color: var(--muted); }
-    .stack-tags { display: flex; flex-wrap: wrap; gap: 10px; }
-    .stack-tag {
-      border: 1px solid var(--card-accent);
-      color: var(--card-accent);
-      padding: 5px 16px; border-radius: 50px;
-      font-size: 0.8rem; font-weight: 500;
-    }
-    .stack-card p.stack-desc { color: #a1a1aa; line-height: 1.7; font-size: 0.98rem; max-width: 90%; margin: 0; }
-    .stack-badge {
-      display: inline-block; padding: 5px 14px; border-radius: 50px;
-      font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
-      background: rgba(201,168,76,0.12); border: 1px solid var(--gold-dim);
-      color: var(--gold);
-    }
-    @media (max-width: 600px) {
-      .stack-card { padding: 28px 22px; }
-      .stack-card h3 { font-size: 1.4rem; }
-    }
-
-    /* === PROJECTS GRID === */
-    .projects-grid {
-      max-width: 1100px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 36px;
-    }
+    /* === PROJECTS === */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 32px; }
     @media (max-width: 500px) { .projects-grid { grid-template-columns: 1fr; } }
-    .proj-card {
-      background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px;
-      overflow: hidden; transition: transform 0.3s, border-color 0.3s;
-    }
-    .proj-card:hover { transform: translateY(-6px); border-color: var(--teal-dim); }
-    .proj-preview { position: relative; height: 260px; background: #000; overflow: hidden; }
-    .proj-preview iframe {
-      width: 100%; height: 100%; border: none; pointer-events: none;
-      opacity: 0.65; transition: opacity 0.3s;
-    }
+    .proj-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; transition: transform 0.3s, border-color 0.3s; }
+    .proj-card:hover { transform: translateY(-5px); border-color: var(--teal-dim); }
+    .proj-preview { position: relative; height: 240px; background: #000; overflow: hidden; }
+    .proj-preview iframe { width: 100%; height: 100%; border: none; pointer-events: none; opacity: 0.6; transition: opacity 0.3s; }
     .proj-card:hover .proj-preview iframe { opacity: 0.95; }
-    .proj-overlay {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-      padding: 12px 24px; border-radius: 50px; font-weight: 700; font-size: 0.8rem;
-      background: var(--gold); color: #0a1628;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-      transition: transform 0.3s;
-    }
-    .proj-overlay:hover { transform: translate(-50%,-50%) scale(1.05); }
-    .proj-info { padding: 28px; }
-    .proj-info h3 { font-family: 'Righteous', sans-serif; font-size: 1.25rem; font-weight: 400; margin-bottom: 10px; color: var(--cream); }
-    .proj-info p { color: var(--muted); font-size: 0.9rem; margin-bottom: 16px; line-height: 1.6; }
+    .proj-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); padding: 10px 22px; border-radius: 50px; font-weight: 700; font-size: 0.78rem; background: var(--gold); color: #0a1628; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
+    .proj-info { padding: 24px; }
+    .proj-info h3 { font-family: 'Righteous', sans-serif; font-size: 1.15rem; font-weight: 400; margin-bottom: 8px; color: var(--cream); }
+    .proj-info p { color: var(--muted); font-size: 0.88rem; margin-bottom: 14px; line-height: 1.6; }
     .proj-tags { display: flex; gap: 8px; flex-wrap: wrap; }
-    .proj-tag {
-      padding: 5px 14px; border-radius: 50px; font-size: 0.72rem; font-weight: 600;
-      border: 1px solid var(--teal-dim); color: var(--teal);
-      background: rgba(45,125,154,0.06);
-    }
-
-    /* === TECH CONVEYOR === */
-    .tech-section { padding: 80px 0; border-top: 1px solid var(--border); overflow: hidden; }
-    .tech-section .section-head { margin-bottom: 40px; }
-    .tech-row { display: flex; gap: 20px; width: max-content; padding: 8px 0; }
-    .tech-row.ltr { animation: scrollLTR 50s linear infinite; }
-    @keyframes scrollLTR {
-      0% { transform: translateX(-50%); }
-      100% { transform: translateX(0); }
-    }
-    .tech-pill {
-      flex-shrink: 0; display: flex; align-items: center; gap: 12px;
-      padding: 14px 22px; background: rgba(10,22,40,0.8);
-      border: 1px solid var(--border); border-radius: 14px;
-      transition: transform 0.3s, border-color 0.3s;
-    }
-    .tech-pill:hover { transform: translateY(-4px) scale(1.03); border-color: var(--gold); }
-    .tech-pill i { font-size: 1.6rem; color: var(--gold); }
-    .tech-pill span { font-weight: 700; font-size: 0.9rem; }
+    .proj-tag { padding: 4px 12px; border-radius: 50px; font-size: 0.7rem; font-weight: 600; border: 1px solid var(--teal-dim); color: var(--teal); background: rgba(45,125,154,0.05); }
 
     /* === CONTACT === */
-    .contact {
-      padding: 100px 20px; text-align: center;
-      border-top: 1px solid var(--border);
-    }
-    .contact-row {
-      display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;
-      max-width: 700px; margin: 0 auto;
-    }
-    .contact-chip {
-      display: flex; align-items: center; gap: 10px;
-      padding: 14px 24px; background: var(--bg-card);
-      border: 1px solid var(--border); border-radius: 50px;
-      transition: border-color 0.3s, transform 0.3s;
-    }
+    .contact-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 30px; }
+    .contact-chip { display: flex; align-items: center; gap: 10px; padding: 12px 22px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 50px; transition: border-color 0.3s, transform 0.3s; }
     .contact-chip:hover { border-color: var(--gold); transform: translateY(-3px); }
     .contact-chip i { color: var(--gold); font-size: 1rem; }
     .contact-chip span { font-size: 0.85rem; font-weight: 600; }
 
     /* === FOOTER === */
-    footer {
-      padding: 30px 20px; text-align: center;
-      border-top: 1px solid var(--border);
-      font-size: 0.78rem; color: var(--muted); letter-spacing: 1px;
-    }
+    footer { padding: 28px 48px; text-align: center; border-top: 1px solid var(--border); font-size: 0.76rem; color: var(--muted); letter-spacing: 1px; }
 
-    /* === RESPONSIVE === */
-    @media (max-width: 600px) {
-      .hero { padding: 90px 15px 30px; }
-      .nav-btn { padding: 8px 10px; font-size: 0.62rem; letter-spacing: 1px; }
-      .projects-grid { grid-template-columns: 1fr; }
-    }
-
-    /* === i18n HIDE/SHOW === */
+    /* === i18n === */
     [data-lang="es"] { display: none; }
     html[lang="es"] [data-lang="es"] { display: initial; }
     html[lang="es"] [data-lang="en"] { display: none; }
@@ -353,270 +261,277 @@
 </head>
 <body>
 
-<!-- LANG SWITCH -->
-<div class="lang-switch">
-  <button class="lang-btn active" onclick="setLang('en')">EN</button>
-  <button class="lang-btn" onclick="setLang('es')">ES</button>
-</div>
-
-<!-- NAV -->
-<div class="nav-container">
-  <nav class="nav-bar">
-    <a href="#about" class="nav-btn active" data-t="about">
-      <span data-lang="en">About</span><span data-lang="es">Sobre Mí</span>
-    </a>
-    <a href="#workshops" class="nav-btn" data-t="workshops">
-      <span data-lang="en">Workshops</span><span data-lang="es">Talleres</span>
-    </a>
-    <a href="#projects" class="nav-btn" data-t="projects">
-      <span data-lang="en">Projects</span><span data-lang="es">Proyectos</span>
-    </a>
-    <a href="#education" class="nav-btn" data-t="education">
-      <span data-lang="en">Education</span><span data-lang="es">Formación</span>
-    </a>
-    <a href="#contact" class="nav-btn" data-t="contact">
-      <span data-lang="en">Contact</span><span data-lang="es">Contacto</span>
-    </a>
+<!-- HEADER -->
+<header class="site-header">
+  <a href="#about" class="site-title">Jessica Ocaña Falcón</a>
+  <nav class="site-nav">
+    <a href="#about" data-t="about"><span data-lang="en">About</span><span data-lang="es">Sobre mí</span></a>
+    <a href="#work" data-t="work"><span data-lang="en">Work</span><span data-lang="es">Experiencia</span></a>
+    <a href="#education" data-t="education"><span data-lang="en">Education</span><span data-lang="es">Formación</span></a>
+    <a href="#projects" data-t="projects"><span data-lang="en">Projects</span><span data-lang="es">Proyectos</span></a>
+    <a href="#workshops" data-t="workshops"><span data-lang="en">Workshops</span><span data-lang="es">Talleres</span></a>
+    <a href="#contact" data-t="contact"><span data-lang="en">Contact</span><span data-lang="es">Contacto</span></a>
+    <div class="nav-divider"></div>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('es')">ES</button>
+    </div>
   </nav>
-</div>
-
-<!-- HERO -->
-<header class="hero">
-  <h1>Jessica Ocaña Falcón</h1>
-  <p class="sub">Geospatial Analysis · Data Science · GeoAI</p>
 </header>
 
 <!-- ABOUT -->
 <section id="about" class="section">
-  <div class="about-grid">
-    <div class="about-text">
-      <div class="section-head" style="text-align:left; margin-bottom:30px;">
-        <h2><span data-lang="en">About <span class="accent">Me</span></span><span data-lang="es">Sobre <span class="accent">Mí</span></span></h2>
+  <div class="section-inner">
+    <div class="about-grid">
+      <div>
+        <p class="section-label">Geospatial Analysis · Data Science · GeoAI</p>
+        <h1 class="section-title" data-lang="en">About <span class="accent">Me</span></h1>
+        <h1 class="section-title" data-lang="es">Sobre <span class="accent">Mí</span></h1>
+        <div data-lang="en">
+          <p>Geospatial analysis and data science specialist with a Master's in Geospatial Information Sciences (Computational Geointelligence, CentroGeo) and a bachelor's in Environmental Management. I design and automate GIS workflows — both open source (QGIS, PostGIS, GDAL) and proprietary (ArcGIS Pro, ENVI) —, Machine Learning models, and data visualization platforms for research institutions, government, and international organizations like UNDP, ECOSUR, and INAH.</p>
+          <p>My work connects territorial analysis with decision-making: I turn spatial, demographic, and social data into maps, dashboards, and predictive models that reveal patterns, vulnerabilities, and access gaps across five states in southeastern Mexico.</p>
+          <p>I combine technical expertise (Python, R, SQL, QGIS, PostGIS, Google Earth Engine) with applied research experience and the ability to communicate results to both technical and non-technical audiences — taking projects from exploratory analysis to production-ready cartographic products and automated systems.</p>
+        </div>
+        <div data-lang="es">
+          <p>Especialista en análisis geoespacial y ciencia de datos, con maestría en Ciencias de la Información Geoespacial (Geointeligencia Computacional, CentroGeo) y licenciatura en Gestión Ambiental. Diseño y automatizo flujos de trabajo en SIG — tanto open source (QGIS, PostGIS, GDAL) como privativo (ArcGIS Pro, ENVI) —, modelos de Machine Learning y plataformas de visualización de datos para instituciones de investigación, gobierno y organismos internacionales como PNUD, ECOSUR e INAH.</p>
+          <p>Mi trabajo conecta el análisis territorial con la toma de decisiones: transformo datos espaciales, demográficos y sociales en mapas, dashboards y modelos predictivos que identifican patrones, vulnerabilidades y brechas de acceso en cinco estados del sureste de México.</p>
+          <p>Combino dominio técnico (Python, R, SQL, QGIS, PostGIS, Google Earth Engine) con experiencia en investigación aplicada y comunicación de resultados a audiencias técnicas y no técnicas — llevando proyectos desde el análisis exploratorio hasta la entrega de productos cartográficos y sistemas automatizados listos para producción.</p>
+        </div>
+        <div class="tags">
+          <span class="tag">Geospatial Analysis</span>
+          <span class="tag">Data Science</span>
+          <span class="tag">GeoAI</span>
+          <span class="tag">Open Source & Proprietary GIS</span>
+          <span class="tag">Cartographic Automation</span>
+          <span class="tag">Data Visualization</span>
+        </div>
       </div>
-
-      <div data-lang="en">
-        <p>Geospatial analysis and data science specialist with a Master's in Geospatial Information Sciences (Computational Geointelligence, CentroGeo) and a bachelor's in Environmental Management. I design and automate GIS workflows — both open source (QGIS, PostGIS, GDAL) and proprietary (ArcGIS Pro, ENVI) —, Machine Learning models, and data visualization platforms for research institutions, government, and international organizations like UNDP, ECOSUR, and INAH.</p>
-        <p>My work connects territorial analysis with decision-making: I turn spatial, demographic, and social data into maps, dashboards, and predictive models that reveal patterns, vulnerabilities, and access gaps. I've worked on remote sensing, environmental monitoring, mobility, and social indicator analysis projects across five states in southeastern Mexico.</p>
-        <p>I combine technical expertise (Python, R, SQL, QGIS, PostGIS, Google Earth Engine) with applied research experience and the ability to communicate results to both technical and non-technical audiences — taking projects from exploratory analysis to production-ready cartographic products and automated systems.</p>
-      </div>
-
-      <div data-lang="es">
-        <p>Especialista en análisis geoespacial y ciencia de datos, con maestría en Ciencias de la Información Geoespacial (Geointeligencia Computacional, CentroGeo) y licenciatura en Gestión Ambiental. Diseño y automatizo flujos de trabajo en SIG — tanto open source (QGIS, PostGIS, GDAL) como privativo (ArcGIS Pro, ENVI) —, modelos de Machine Learning y plataformas de visualización de datos para instituciones de investigación, gobierno y organismos internacionales como PNUD, ECOSUR e INAH.</p>
-        <p>Mi trabajo conecta el análisis territorial con la toma de decisiones: transformo datos espaciales, demográficos y sociales en mapas, dashboards y modelos predictivos que identifican patrones, vulnerabilidades y brechas de acceso. He trabajado en proyectos de percepción remota, monitoreo ambiental, movilidad y análisis de indicadores sociales en cinco estados del sureste de México.</p>
-        <p>Combino dominio técnico (Python, R, SQL, QGIS, PostGIS, Google Earth Engine) con experiencia en investigación aplicada y comunicación de resultados a audiencias técnicas y no técnicas — llevando proyectos desde el análisis exploratorio hasta la entrega de productos cartográficos y sistemas automatizados listos para producción.</p>
-      </div>
-
-      <div class="tags">
-        <span class="tag">Geospatial Analysis</span>
-        <span class="tag">Data Science</span>
-        <span class="tag">GeoAI</span>
-        <span class="tag">Open Source & Proprietary GIS</span>
-        <span class="tag">Cartographic Automation</span>
-        <span class="tag">Data Visualization</span>
+      <div class="about-photo">
+        <img src="images/jessica-photo.jpg" alt="Jessica Ocaña Falcón"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="placeholder" style="display:none">
+          <i class="fas fa-satellite-dish"></i>
+          <span>Your photo here</span>
+        </div>
       </div>
     </div>
-    <div class="photo-frame">
-      <img src="images/jessica-photo.jpg" alt="Jessica Ocaña Falcón">
-      <div class="ph-icon"><i class="fas fa-satellite-dish"></i></div>
-      <h4 data-lang="en">Your Photo Here</h4><h4 data-lang="es">Tu Foto Aquí</h4>
-      <p data-lang="en">(Replace with your image)</p><p data-lang="es">(Reemplaza con tu imagen)</p>
-    </div>
+  </div>
 </section>
 
-<!-- WORKSHOPS -->
-<section id="workshops" class="section">
-  <div class="section-head">
-    <h2><span data-lang="en">Workshops & <span class="accent">Courses</span></span><span data-lang="es">Talleres & <span class="accent">Cursos</span></span></h2>
-    <p data-lang="en">Educational programs I've designed and facilitated in geospatial data science.</p>
-    <p data-lang="es">Programas educativos que he diseñado y facilitado en ciencia de datos geoespaciales.</p>
+<!-- WORK -->
+<section id="work" class="section">
+  <div class="section-inner">
+    <p class="section-label" data-lang="en">Professional Experience</p>
+    <p class="section-label" data-lang="es">Experiencia Profesional</p>
+    <h2 class="section-title" data-lang="en">Where I've <span class="accent">Worked</span></h2>
+    <h2 class="section-title" data-lang="es">Mi <span class="accent">Trayectoria</span></h2>
+    <div class="work-grid">
+      <div class="work-item">
+        <div class="work-date">Jun 2025 – May 2026</div>
+        <div class="work-content">
+          <h3 data-lang="en">Geomatics Specialist</h3><h3 data-lang="es">Especialista en Geomática</h3>
+          <div class="work-org">Tren Maya Archaeological Salvage — INAH</div>
+          <p class="work-desc" data-lang="en">Designed and implemented an automated cartographic atlas system in Python/QGIS for monitoring the Maya Train corridor. Managed spatial databases and processed LiDAR data and drone photogrammetry for topographic characterization across southeastern Mexico.</p>
+          <p class="work-desc" data-lang="es">Diseñé e implementé un sistema de atlas cartográficos automatizados en Python/QGIS para el monitoreo del corredor del Tren Maya. Gestioné bases de datos espaciales y procesé datos LiDAR y vuelos fotogramétricos con dron.</p>
+          <div class="work-tags"><span class="work-tag">Python</span><span class="work-tag">QGIS</span><span class="work-tag">PostGIS</span><span class="work-tag">LiDAR</span></div>
+        </div>
+      </div>
+      <div class="work-item">
+        <div class="work-date">Mar – Aug 2023</div>
+        <div class="work-content">
+          <h3 data-lang="en">Data & Geomatics Analyst</h3><h3 data-lang="es">Analista de Datos y Geomática</h3>
+          <div class="work-org" data-lang="en">Women's State Institute of Tabasco — IEM</div>
+          <div class="work-org" data-lang="es">Instituto Estatal de la Mujer de Tabasco — IEM</div>
+          <p class="work-desc" data-lang="en">Designed a geospatial visualization system for gender violence indicators, integrating victim service data to identify geographic access gaps to mental health services in Tabasco. Built interactive dashboards for social indicator monitoring.</p>
+          <p class="work-desc" data-lang="es">Diseñé un sistema de visualización geoespacial de indicadores de violencia de género, integrando datos de servicios de atención a víctimas para identificar brechas geográficas de acceso a servicios de salud mental en Tabasco.</p>
+          <div class="work-tags"><span class="work-tag">Power BI</span><span class="work-tag">Geospatial Analysis</span><span class="work-tag">Social Indicators</span></div>
+        </div>
+      </div>
+      <div class="work-item">
+        <div class="work-date">Mar 2022 – Apr 2023</div>
+        <div class="work-content">
+          <h3 data-lang="en">Spatial Database & Remote Sensing Analyst</h3><h3 data-lang="es">Analista de Bases de Datos Espaciales y Percepción Remota</h3>
+          <div class="work-org">ECOSUR — UK-PACKT Project</div>
+          <p class="work-desc" data-lang="en">Strengthened earth observation capabilities across five states in southeastern Mexico. Developed land cover change analysis using supervised classification and generated cartographic inputs for environmental restoration decisions.</p>
+          <p class="work-desc" data-lang="es">Fortalecí capacidades en observación terrestre para cinco estados del sureste mexicano. Desarrollé análisis de cambio de cobertura vegetal mediante clasificación supervisada y generé insumos cartográficos para restauración ambiental.</p>
+          <div class="work-tags"><span class="work-tag">GEE</span><span class="work-tag">Remote Sensing</span><span class="work-tag">Classification</span></div>
+        </div>
+      </div>
+      <div class="work-item">
+        <div class="work-date">Jul 2017 – Feb 2021</div>
+        <div class="work-content">
+          <h3 data-lang="en">Research Assistant</h3><h3 data-lang="es">Asistente de Investigación</h3>
+          <div class="work-org">UJAT — Environmental Diagnostics & Geographic Analysis Lab</div>
+          <p class="work-desc" data-lang="en">Contributed to scientific publications through thematic cartography and spatial analysis of coastal ecosystem vulnerability. Validated geospatial data through fieldwork campaigns in coastal and wetland zones.</p>
+          <p class="work-desc" data-lang="es">Contribuí a publicaciones científicas mediante cartografía temática y análisis espacial sobre vulnerabilidad territorial de ecosistemas costeros. Validé información geoespacial en campo.</p>
+          <div class="work-tags"><span class="work-tag">Cartography</span><span class="work-tag">Fieldwork</span><span class="work-tag">R</span></div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="ws-grid">
-    <a href="https://jdanifalcon.github.io/curso-pyqgis/" target="_blank" class="ws-card ws-card--link">
-      <div class="ws-icon"><i class="fab fa-python"></i></div>
-      <h3>Python in QGIS</h3>
-      <p data-lang="en">Geoprocessing automation with PyQGIS: from Python fundamentals to advanced batch processing scripts.</p>
-      <p data-lang="es">Automatización de geoprocesos con PyQGIS: desde fundamentos de Python hasta scripts avanzados de procesamiento masivo.</p>
-      <div class="ws-tags"><span class="ws-tag">Python</span><span class="ws-tag">QGIS</span><span class="ws-tag">4 modules</span></div>
-      <span class="ws-link-hint"><span data-lang="en">View syllabus</span><span data-lang="es">Ver temario</span> <i class="fas fa-arrow-right"></i></span>
-    </a>
+</section>
 
-    <a href="https://jdanifalcon.github.io/curso-postgis-01/" target="_blank" class="ws-card ws-card--link">
-      <div class="ws-icon"><i class="fas fa-database"></i></div>
-      <h3>PostGIS Essentials</h3>
-      <p data-lang="en">Spatial database fundamentals: data loading, spatial SQL queries, and geospatial analysis with PostgreSQL/PostGIS.</p>
-      <p data-lang="es">Fundamentos de bases de datos espaciales: carga de datos, consultas SQL espaciales y análisis geoespacial con PostgreSQL/PostGIS.</p>
-      <div class="ws-tags"><span class="ws-tag">SQL</span><span class="ws-tag">PostGIS</span><span class="ws-tag">5 sessions</span></div>
-      <span class="ws-link-hint"><span data-lang="en">View syllabus</span><span data-lang="es">Ver temario</span> <i class="fas fa-arrow-right"></i></span>
-    </a>
+<!-- EDUCATION + TECH STACK -->
+<section id="education" class="section" style="display:block; padding-top: 120px;">
+  <div class="section-inner">
+    <p class="section-label" data-lang="en">Academic Background</p>
+    <p class="section-label" data-lang="es">Formación Académica</p>
+    <h2 class="section-title" data-lang="en">Education & <span class="accent">Skills</span></h2>
+    <h2 class="section-title" data-lang="es">Formación & <span class="accent">Habilidades</span></h2>
 
-    <div class="ws-card">
-      <div class="ws-icon"><i class="fas fa-chart-line"></i></div>
-      <h3>R Basics</h3>
-      <p data-lang="en">Programming fundamentals, dataframe manipulation, and statistical visualization applied to environmental sciences.</p>
-      <p data-lang="es">Fundamentos de programación, manipulación de dataframes y visualización estadística aplicada a ciencias ambientales.</p>
-      <div class="ws-tags"><span class="ws-tag">R</span><span class="ws-tag">Data Science</span></div>
+    <div class="edu-cards">
+      <div class="edu-card">
+        <span class="edu-badge" data-lang="en">Degree in progress</span>
+        <span class="edu-badge" data-lang="es">En proceso de titulación</span>
+        <h3 data-lang="en">M.Sc. Geospatial Information Sciences</h3>
+        <h3 data-lang="es">Maestría en Ciencias de la Información Geoespacial</h3>
+        <div class="edu-inst">CentroGeo</div>
+        <div class="edu-yr">2023 – 2025</div>
+        <p data-lang="en">Specialization in Computational Geointelligence. Thesis: semantic segmentation with deep neural networks (U-Net) for coastline evolution analysis using Sentinel-2 imagery.</p>
+        <p data-lang="es">Especialización en Geointeligencia Computacional. Tesis: segmentación semántica con redes neuronales profundas (U-Net) aplicada al análisis de la evolución de la línea costera con imágenes Sentinel-2.</p>
+      </div>
+      <div class="edu-card">
+        <h3 data-lang="en">B.Sc. Environmental Management</h3>
+        <h3 data-lang="es">Licenciatura en Gestión Ambiental</h3>
+        <div class="edu-inst">Universidad Juárez Autónoma de Tabasco (UJAT)</div>
+        <div class="edu-yr">2014 – 2020</div>
+        <p data-lang="en">Training in ecosystem management, sustainable planning, environmental diagnostics, and cartographic applications for territorial analysis.</p>
+        <p data-lang="es">Formación en manejo de ecosistemas, planeación sustentable, diagnóstico ambiental y aplicación cartográfica para el análisis territorial.</p>
+      </div>
+      <div class="edu-card">
+        <h3 data-lang="en">Diploma in Ecological Restoration & Environmental Services</h3>
+        <h3 data-lang="es">Diplomado en Restauración Ecológica y Servicios Ambientales</h3>
+        <div class="edu-inst">Instituto de Ecología, A.C. (INECOL)</div>
+        <p data-lang="en">Landscape modeling, functional recovery assessment of degraded ecosystems, and ecological restoration strategies.</p>
+        <p data-lang="es">Modelado del paisaje, valoración y recuperación funcional de ecosistemas degradados y estrategias de restauración ecológica.</p>
+      </div>
     </div>
 
-    <div class="ws-card">
-      <div class="ws-icon"><i class="fas fa-globe"></i></div>
-      <h3>QGIS Basics</h3>
-      <p data-lang="en">Vector layer creation, raster manipulation, georeferencing, and professional cartographic output.</p>
-      <p data-lang="es">Creación de capas vectoriales, manipulación de rasters, georreferenciación y salida cartográfica profesional.</p>
-      <div class="ws-tags"><span class="ws-tag">QGIS</span><span class="ws-tag">GIS</span></div>
+    <!-- TECH STACK inside Education -->
+    <p class="section-label tech-label">Tech Stack</p>
+    <div class="tech-wrap">
+      <div class="tech-row">
+        <div class="tech-pill"><i class="fab fa-python"></i><span>Python</span></div>
+        <div class="tech-pill"><i class="fas fa-chart-line"></i><span>R</span></div>
+        <div class="tech-pill"><i class="fas fa-globe-americas"></i><span>QGIS</span></div>
+        <div class="tech-pill"><i class="fas fa-map-marked-alt"></i><span>ArcGIS Pro</span></div>
+        <div class="tech-pill"><i class="fas fa-satellite"></i><span>Google Earth Engine</span></div>
+        <div class="tech-pill"><i class="fas fa-database"></i><span>PostgreSQL / PostGIS</span></div>
+        <div class="tech-pill"><i class="fas fa-brain"></i><span>PyTorch</span></div>
+        <div class="tech-pill"><i class="fab fa-js"></i><span>JavaScript</span></div>
+        <div class="tech-pill"><i class="fas fa-chart-bar"></i><span>Power BI</span></div>
+        <div class="tech-pill"><i class="fab fa-git-alt"></i><span>Git</span></div>
+        <div class="tech-pill"><i class="fas fa-code"></i><span>HTML / CSS</span></div>
+        <div class="tech-pill"><i class="fas fa-table"></i><span>Tableau</span></div>
+        <div class="tech-pill"><i class="fab fa-python"></i><span>Python</span></div>
+        <div class="tech-pill"><i class="fas fa-chart-line"></i><span>R</span></div>
+        <div class="tech-pill"><i class="fas fa-globe-americas"></i><span>QGIS</span></div>
+        <div class="tech-pill"><i class="fas fa-map-marked-alt"></i><span>ArcGIS Pro</span></div>
+        <div class="tech-pill"><i class="fas fa-satellite"></i><span>Google Earth Engine</span></div>
+        <div class="tech-pill"><i class="fas fa-database"></i><span>PostgreSQL / PostGIS</span></div>
+        <div class="tech-pill"><i class="fas fa-brain"></i><span>PyTorch</span></div>
+        <div class="tech-pill"><i class="fab fa-js"></i><span>JavaScript</span></div>
+        <div class="tech-pill"><i class="fas fa-chart-bar"></i><span>Power BI</span></div>
+        <div class="tech-pill"><i class="fab fa-git-alt"></i><span>Git</span></div>
+        <div class="tech-pill"><i class="fas fa-code"></i><span>HTML / CSS</span></div>
+        <div class="tech-pill"><i class="fas fa-table"></i><span>Tableau</span></div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- PROJECTS -->
-<section id="projects" class="section">
-  <div class="section-head">
-    <h2><span data-lang="en">Apps & <span class="accent">Projects</span></span><span data-lang="es">Aplicaciones & <span class="accent">Proyectos</span></span></h2>
-    <p data-lang="en">Interactive maps and platforms I've designed and published.</p>
-    <p data-lang="es">Mapas interactivos y plataformas que he diseñado y publicado.</p>
-  </div>
-  <div class="projects-grid">
-    <article class="proj-card">
-      <div class="proj-preview">
-        <iframe src="https://jdofalcon.shinyapps.io/capital-natural-sureste-mexico/" title="Capital Natural" loading="lazy"></iframe>
-        <a href="https://jdofalcon.shinyapps.io/capital-natural-sureste-mexico/" target="_blank" class="proj-overlay"><span data-lang="en">Open Map</span><span data-lang="es">Abrir Mapa</span> <i class="fas fa-external-link-alt"></i></a>
-      </div>
-      <div class="proj-info">
-        <h3 data-lang="en">Natural Capital of Southeastern Mexico</h3>
-        <h3 data-lang="es">Capital Natural del Sureste de México</h3>
-        <p data-lang="en">Interactive R Shiny platform for territorial analysis and ecosystem monitoring in southeastern Mexico.</p>
-        <p data-lang="es">Plataforma interactiva en R Shiny para análisis territorial y monitoreo de ecosistemas en el Sureste Mexicano.</p>
-        <div class="proj-tags"><span class="proj-tag">R Shiny</span><span class="proj-tag">Geomatics</span><span class="proj-tag">WebGIS</span></div>
-      </div>
-    </article>
-
-    <article class="proj-card">
-      <div class="proj-preview">
-        <iframe src="https://tablero-mvilidad-uxmal-jdof.netlify.app/" title="Movilidad Uxmal" loading="lazy"></iframe>
-        <a href="https://tablero-mvilidad-uxmal-jdof.netlify.app/" target="_blank" class="proj-overlay"><span data-lang="en">Open Dashboard</span><span data-lang="es">Abrir Tablero</span> <i class="fas fa-external-link-alt"></i></a>
-      </div>
-      <div class="proj-info">
-        <h3 data-lang="en">Uxmal Mobility Dashboard</h3>
-        <h3 data-lang="es">Tablero de Movilidad Uxmal</h3>
-        <p data-lang="en">Analytical dashboard for studying spatial mobility patterns at the Uxmal archaeological site.</p>
-        <p data-lang="es">Dashboard analítico para estudio de patrones de movilidad espacial en el sitio arqueológico de Uxmal.</p>
-        <div class="proj-tags"><span class="proj-tag">JavaScript</span><span class="proj-tag">Spatial Analysis</span><span class="proj-tag">WebGIS</span></div>
-      </div>
-    </article>
+<section id="projects" class="section" style="display:block; padding-top: 120px;">
+  <div class="section-inner">
+    <p class="section-label" data-lang="en">Selected Work</p>
+    <p class="section-label" data-lang="es">Trabajo Seleccionado</p>
+    <h2 class="section-title" data-lang="en">Apps & <span class="accent">Projects</span></h2>
+    <h2 class="section-title" data-lang="es">Aplicaciones & <span class="accent">Proyectos</span></h2>
+    <div class="projects-grid">
+      <article class="proj-card">
+        <div class="proj-preview">
+          <iframe src="https://jdofalcon.shinyapps.io/capital-natural-sureste-mexico/" title="Capital Natural" loading="lazy"></iframe>
+          <a href="https://jdofalcon.shinyapps.io/capital-natural-sureste-mexico/" target="_blank" class="proj-overlay"><span data-lang="en">Open Map</span><span data-lang="es">Abrir Mapa</span> <i class="fas fa-external-link-alt"></i></a>
+        </div>
+        <div class="proj-info">
+          <h3 data-lang="en">Natural Capital of SE Mexico</h3><h3 data-lang="es">Capital Natural del Sureste de México</h3>
+          <p data-lang="en">Interactive R Shiny platform for territorial analysis and ecosystem monitoring in southeastern Mexico.</p>
+          <p data-lang="es">Plataforma interactiva en R Shiny para análisis territorial y monitoreo de ecosistemas en el Sureste Mexicano.</p>
+          <div class="proj-tags"><span class="proj-tag">R Shiny</span><span class="proj-tag">Geomatics</span><span class="proj-tag">WebGIS</span></div>
+        </div>
+      </article>
+      <article class="proj-card">
+        <div class="proj-preview">
+          <iframe src="https://tablero-mvilidad-uxmal-jdof.netlify.app/" title="Movilidad Uxmal" loading="lazy"></iframe>
+          <a href="https://tablero-mvilidad-uxmal-jdof.netlify.app/" target="_blank" class="proj-overlay"><span data-lang="en">Open Dashboard</span><span data-lang="es">Abrir Tablero</span> <i class="fas fa-external-link-alt"></i></a>
+        </div>
+        <div class="proj-info">
+          <h3 data-lang="en">Uxmal Mobility Dashboard</h3><h3 data-lang="es">Tablero de Movilidad Uxmal</h3>
+          <p data-lang="en">Analytical dashboard for studying spatial mobility patterns at the Uxmal archaeological site.</p>
+          <p data-lang="es">Dashboard analítico para estudio de patrones de movilidad espacial en el sitio arqueológico de Uxmal.</p>
+          <div class="proj-tags"><span class="proj-tag">JavaScript</span><span class="proj-tag">Spatial Analysis</span><span class="proj-tag">WebGIS</span></div>
+        </div>
+      </article>
+    </div>
   </div>
 </section>
 
-<!-- EDUCATION — STACKED STICKY CARDS -->
-<section id="education" class="section" style="padding-bottom: 200px;">
-  <div class="section-head">
-    <h2><span data-lang="en">Academic <span class="accent">Background</span></span><span data-lang="es">Formación <span class="accent">Académica</span></span></h2>
-    <p data-lang="en">Education in geosciences, environmental management, and computational geointelligence.</p>
-    <p data-lang="es">Trayectoria formativa en geociencias, gestión ambiental y geointeligencia computacional.</p>
-  </div>
-  <div class="stack-container">
-    <article class="stack-card" style="--idx: 0; --card-bg: #0f1a12; --card-accent: #c9a84c;">
-      <span class="stack-badge" data-lang="en">Degree in progress</span>
-      <span class="stack-badge" data-lang="es">En proceso de titulación</span>
-      <h3 data-lang="en">M.Sc. Geospatial Information Sciences</h3>
-      <h3 data-lang="es">Maestría en Ciencias de la Información Geoespacial</h3>
-      <span class="stack-inst">CentroGeo</span>
-      <span class="stack-yr">2023 – 2025</span>
-      <div class="stack-tags">
-        <span class="stack-tag">Computational Geointelligence</span>
-        <span class="stack-tag">Deep Learning</span>
-        <span class="stack-tag">Remote Sensing</span>
+<!-- WORKSHOPS -->
+<section id="workshops" class="section" style="display:block; padding-top: 120px;">
+  <div class="section-inner">
+    <p class="section-label" data-lang="en">Teaching</p>
+    <p class="section-label" data-lang="es">Docencia</p>
+    <h2 class="section-title" data-lang="en">Workshops & <span class="accent">Courses</span></h2>
+    <h2 class="section-title" data-lang="es">Talleres & <span class="accent">Cursos</span></h2>
+    <div class="ws-grid">
+      <a href="https://jdanifalcon.github.io/curso-pyqgis/" target="_blank" class="ws-card ws-card--link">
+        <div class="ws-icon"><i class="fab fa-python"></i></div>
+        <h3>Python in QGIS</h3>
+        <p data-lang="en">Geoprocessing automation with PyQGIS: from Python fundamentals to advanced batch processing scripts.</p>
+        <p data-lang="es">Automatización de geoprocesos con PyQGIS: desde fundamentos de Python hasta scripts de procesamiento masivo.</p>
+        <div class="ws-tags"><span class="ws-tag">Python</span><span class="ws-tag">QGIS</span><span class="ws-tag">4 modules</span></div>
+        <span class="ws-link-hint"><span data-lang="en">View syllabus</span><span data-lang="es">Ver temario</span> <i class="fas fa-arrow-right"></i></span>
+      </a>
+      <a href="https://jdanifalcon.github.io/curso-postgis-01/" target="_blank" class="ws-card ws-card--link">
+        <div class="ws-icon"><i class="fas fa-database"></i></div>
+        <h3>PostGIS Essentials</h3>
+        <p data-lang="en">Spatial database fundamentals: data loading, spatial SQL queries, and geospatial analysis with PostgreSQL/PostGIS.</p>
+        <p data-lang="es">Fundamentos de bases de datos espaciales: carga de datos, consultas SQL espaciales y análisis geoespacial con PostgreSQL/PostGIS.</p>
+        <div class="ws-tags"><span class="ws-tag">SQL</span><span class="ws-tag">PostGIS</span><span class="ws-tag">5 sessions</span></div>
+        <span class="ws-link-hint"><span data-lang="en">View syllabus</span><span data-lang="es">Ver temario</span> <i class="fas fa-arrow-right"></i></span>
+      </a>
+      <div class="ws-card">
+        <div class="ws-icon"><i class="fas fa-chart-line"></i></div>
+        <h3>R Basics</h3>
+        <p data-lang="en">Programming fundamentals, dataframe manipulation, and statistical visualization for environmental sciences.</p>
+        <p data-lang="es">Fundamentos de programación, manipulación de dataframes y visualización estadística aplicada a ciencias ambientales.</p>
+        <div class="ws-tags"><span class="ws-tag">R</span><span class="ws-tag">Data Science</span></div>
       </div>
-      <p class="stack-desc" data-lang="en">Specialization in Computational Geointelligence. Thesis: semantic segmentation with deep neural networks (U-Net) for coastline evolution analysis in Yucatán using Sentinel-2 imagery.</p>
-      <p class="stack-desc" data-lang="es">Especialización en Geointeligencia Computacional. Tesis: segmentación semántica con redes neuronales profundas (U-Net) aplicada al análisis de la evolución de la línea costera de Yucatán con imágenes Sentinel-2.</p>
-    </article>
-
-    <article class="stack-card" style="--idx: 1; --card-bg: #1a1520; --card-accent: #8a9aaf;">
-      <h3 data-lang="en">B.Sc. Environmental Management</h3>
-      <h3 data-lang="es">Licenciatura en Gestión Ambiental</h3>
-      <span class="stack-inst">Universidad Juárez Autónoma de Tabasco (UJAT)</span>
-      <span class="stack-yr">2014 – 2020</span>
-      <div class="stack-tags">
-        <span class="stack-tag">Environmental Science</span>
-        <span class="stack-tag">Ecosystems</span>
-        <span class="stack-tag">Cartography</span>
+      <div class="ws-card">
+        <div class="ws-icon"><i class="fas fa-globe"></i></div>
+        <h3>QGIS Basics</h3>
+        <p data-lang="en">Vector layers, raster manipulation, georeferencing, and professional cartographic output.</p>
+        <p data-lang="es">Capas vectoriales, manipulación de rasters, georreferenciación y salida cartográfica profesional.</p>
+        <div class="ws-tags"><span class="ws-tag">QGIS</span><span class="ws-tag">GIS</span></div>
       </div>
-      <p class="stack-desc" data-lang="en">Training in ecosystem management, sustainable planning, environmental diagnostics, and cartographic application for territorial analysis.</p>
-      <p class="stack-desc" data-lang="es">Formación en manejo de ecosistemas, planeación sustentable, diagnóstico ambiental y aplicación cartográfica para el análisis territorial.</p>
-    </article>
-
-    <article class="stack-card" style="--idx: 2; --card-bg: #0f172a; --card-accent: #2d7d9a;">
-      <h3 data-lang="en">Diploma in Ecological Restoration & Environmental Services</h3>
-      <h3 data-lang="es">Diplomado en Restauración Ecológica y Servicios Ambientales</h3>
-      <span class="stack-inst">Instituto de Ecología, A.C. (INECOL)</span>
-      <div class="stack-tags">
-        <span class="stack-tag">Restoration</span>
-        <span class="stack-tag">Ecosystem Services</span>
-        <span class="stack-tag">Landscape</span>
-      </div>
-      <p class="stack-desc" data-lang="en">Landscape modeling, functional recovery assessment of degraded ecosystems, and ecological restoration strategies.</p>
-      <p class="stack-desc" data-lang="es">Modelado del paisaje, valoración y recuperación funcional de ecosistemas degradados y estrategias de restauración ecológica.</p>
-    </article>
-
-    <article class="stack-card" style="--idx: 3; --card-bg: #1a1510; --card-accent: #c9a84c;">
-      <h3>Jr ML Engineer — Tanzania Deforestation Challenge</h3>
-      <span class="stack-inst">Omdena (International collaborative project)</span>
-      <span class="stack-yr">Jun – Sep 2023</span>
-      <div class="stack-tags">
-        <span class="stack-tag">Deep Learning</span>
-        <span class="stack-tag">Mangroves</span>
-        <span class="stack-tag">Deforestation</span>
-      </div>
-      <p class="stack-desc" data-lang="en">AI pilot project focused on mangroves for national carbon monitoring and deforestation mitigation in Tanzania using satellite imagery.</p>
-      <p class="stack-desc" data-lang="es">Proyecto piloto de IA centrado en manglares para monitoreo nacional de carbono y mitigación de deforestación en Tanzania con imágenes satelitales.</p>
-    </article>
-  </div>
-</section>
-
-<!-- TECH CONVEYOR -->
-<section class="tech-section">
-  <div class="section-head">
-    <h2>Tech <span class="accent">Stack</span></h2>
-  </div>
-  <div class="tech-row ltr">
-    <div class="tech-pill"><i class="fab fa-python"></i><span>Python</span></div>
-    <div class="tech-pill"><i class="fas fa-chart-line"></i><span>R</span></div>
-    <div class="tech-pill"><i class="fas fa-globe-americas"></i><span>QGIS</span></div>
-    <div class="tech-pill"><i class="fas fa-map-marked-alt"></i><span>ArcGIS Pro</span></div>
-    <div class="tech-pill"><i class="fas fa-satellite"></i><span>Google Earth Engine</span></div>
-    <div class="tech-pill"><i class="fas fa-database"></i><span>PostgreSQL / PostGIS</span></div>
-    <div class="tech-pill"><i class="fas fa-brain"></i><span>PyTorch</span></div>
-    <div class="tech-pill"><i class="fab fa-js"></i><span>JavaScript</span></div>
-    <div class="tech-pill"><i class="fas fa-chart-bar"></i><span>Power BI</span></div>
-    <div class="tech-pill"><i class="fab fa-git-alt"></i><span>Git</span></div>
-    <div class="tech-pill"><i class="fas fa-code"></i><span>HTML / CSS</span></div>
-    <div class="tech-pill"><i class="fas fa-table"></i><span>Tableau</span></div>
-    <!-- DUP for seamless loop -->
-    <div class="tech-pill"><i class="fab fa-python"></i><span>Python</span></div>
-    <div class="tech-pill"><i class="fas fa-chart-line"></i><span>R</span></div>
-    <div class="tech-pill"><i class="fas fa-globe-americas"></i><span>QGIS</span></div>
-    <div class="tech-pill"><i class="fas fa-map-marked-alt"></i><span>ArcGIS Pro</span></div>
-    <div class="tech-pill"><i class="fas fa-satellite"></i><span>Google Earth Engine</span></div>
-    <div class="tech-pill"><i class="fas fa-database"></i><span>PostgreSQL / PostGIS</span></div>
-    <div class="tech-pill"><i class="fas fa-brain"></i><span>PyTorch</span></div>
-    <div class="tech-pill"><i class="fab fa-js"></i><span>JavaScript</span></div>
-    <div class="tech-pill"><i class="fas fa-chart-bar"></i><span>Power BI</span></div>
-    <div class="tech-pill"><i class="fab fa-git-alt"></i><span>Git</span></div>
-    <div class="tech-pill"><i class="fas fa-code"></i><span>HTML / CSS</span></div>
-    <div class="tech-pill"><i class="fas fa-table"></i><span>Tableau</span></div>
+    </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="contact">
-  <div class="section-head">
-    <h2><span data-lang="en">Let's <span class="accent">Collaborate</span></span><span data-lang="es">Hablemos & <span class="accent">Colaboremos</span></span></h2>
-    <p data-lang="en">Open to research collaborations, geospatial consulting, and training.</p>
-    <p data-lang="es">Abierta a colaboraciones en investigación, consultoría geoespacial y capacitación.</p>
-  </div>
-  <div class="contact-row">
-    <a href="mailto:hifalcon@proton.me" class="contact-chip"><i class="fas fa-envelope"></i><span>hifalcon@proton.me</span></a>
-    <a href="https://jdofalcon.carrd.co" target="_blank" class="contact-chip"><i class="fas fa-globe"></i><span>jdofalcon.carrd.co</span></a>
-    <a href="https://github.com/jdanifalcon" target="_blank" class="contact-chip"><i class="fab fa-github"></i><span>GitHub</span></a>
-    <a href="https://linkedin.com/in/jdofalcon" target="_blank" class="contact-chip"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
+<section id="contact" class="section">
+  <div class="section-inner">
+    <p class="section-label" data-lang="en">Get in touch</p>
+    <p class="section-label" data-lang="es">Contacto</p>
+    <h2 class="section-title" data-lang="en">Let's <span class="accent">Collaborate</span></h2>
+    <h2 class="section-title" data-lang="es">Hablemos & <span class="accent">Colaboremos</span></h2>
+    <p style="color:var(--muted); max-width:600px; margin-bottom: 10px;" data-lang="en">Open to research collaborations, geospatial consulting, and training.</p>
+    <p style="color:var(--muted); max-width:600px; margin-bottom: 10px;" data-lang="es">Abierta a colaboraciones en investigación, consultoría geoespacial y capacitación.</p>
+    <div class="contact-row">
+      <a href="mailto:hifalcon@proton.me" class="contact-chip"><i class="fas fa-envelope"></i><span>hifalcon@proton.me</span></a>
+      <a href="https://github.com/jdanifalcon" target="_blank" class="contact-chip"><i class="fab fa-github"></i><span>GitHub</span></a>
+      <a href="https://linkedin.com/in/jdofalcon" target="_blank" class="contact-chip"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
+    </div>
   </div>
 </section>
 
@@ -625,19 +540,16 @@
 </footer>
 
 <script>
-  /* LANG SWITCH */
   function setLang(lang) {
     document.documentElement.lang = lang;
     document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.trim() === lang.toUpperCase()));
   }
-
-  /* NAV ACTIVE ON SCROLL */
-  const secs = document.querySelectorAll('.section, .contact');
-  const btns = document.querySelectorAll('.nav-btn');
+  const secs = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.site-nav a[data-t]');
   window.addEventListener('scroll', () => {
     let cur = '';
-    secs.forEach(s => { if (pageYOffset >= s.offsetTop - s.clientHeight / 3) cur = s.id; });
-    btns.forEach(b => { b.classList.toggle('active', b.dataset.t === cur); });
+    secs.forEach(s => { if (pageYOffset >= s.offsetTop - 200) cur = s.id; });
+    navLinks.forEach(a => a.classList.toggle('active', a.dataset.t === cur));
   });
 </script>
 </body>
